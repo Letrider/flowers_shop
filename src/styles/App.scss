@@ -1,47 +1,47 @@
 .app {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
 
-  header {
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 1rem 2rem;
-  }
+	header {
+		background-color: #fff;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		padding: 1rem 2rem;
+  	}
 
-  nav {
-    display: flex;
-    gap: 2rem;
+	nav {
+		display: flex;
+		gap: 2rem;
 
-    a {
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      transition: background-color 0.3s;
+		a {
+			padding: 0.5rem 1rem;
+			border-radius: 4px;
+			transition: background-color 0.3s;
 
-      &:hover {
-        background-color: #f0f0f0;
-      }
+			&:hover {
+			background-color: #f0f0f0;
+			}
 
-      &.active {
-        background-color: #007bff;
-        color: white;
-      }
-    }
-  }
+			&.active {
+			background-color: green;
+			color: white;
+			}
+		}
+	}
 
-  main {
-    flex: 1;
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
-  }
+	main {
+		flex: 1;
+		padding: 2rem;
+		max-width: 1200px;
+		margin: 0 auto;
+		width: 100%;
+	}
 
-  footer {
-    background-color: #fff;
-    border-top: 1px solid #e0e0e0;
-    padding: 1rem 2rem;
-    text-align: center;
-    color: #666;
-  }
+	footer {
+		background-color: #fff;
+		border-top: 1px solid #e0e0e0;
+		padding: 1rem 2rem;
+		text-align: center;
+		color: #666;
+	}
 }
