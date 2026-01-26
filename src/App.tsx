@@ -1,35 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import { Link, Route, BrowserRouter as Router, Routes, useLocation } from 'react-router-dom';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Home from './pages/Home';
+import Products from './pages/Products';
+import './styles/App.scss';
 
-function App() {
-  const [count, setCount] = useState(0)
+const Navigation = () => {
+  const location = useLocation();
+
+  const isActive = (path: string) => location.pathname === path;
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <nav>
+      <Link to="/" className={isActive('/') ? 'active' : ''}>
+        Главная
+      </Link>
+      <Link to="/products" className={isActive('/products') ? 'active' : ''}>
+        Товары
+      </Link>
+      <Link to="/about" className={isActive('/about') ? 'active' : ''}>
+        О нас
+      </Link>
+      <Link to="/contact" className={isActive('/contact') ? 'active' : ''}>
+        Контакты
+      </Link>
+    </nav>
+  );
+};
 
-export default App
+const App = () => {
+  return (
+    <Router>
+      <div className="app">
+        <header>
+          <Navigation />
+        </header>
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </main>
+        <footer>
+          <p>&copy; 2026 Цветочный магазин. Все права защищены.</p>
+        </footer>
+      </div>
+    </Router>
+  );
+};
+
+export default App;
