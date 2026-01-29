@@ -1,3 +1,47 @@
+Project: flowers_shop — MVP admin + backend
+
+Run locally
+
+1) Frontend
+
+Install & run Vite dev server (from project root):
+
+```bash
+npm install
+npm run dev
+```
+
+Make sure `.env` in project root contains:
+
+```
+VITE_API_BASE=http://localhost:4000
+```
+
+If you add `.env`, restart the frontend dev server so Vite picks it up.
+
+2) Backend
+
+Start server in `server` folder:
+
+```bash
+cd server
+npm install
+npm run dev
+```
+
+Notes
+- Admin default credentials: `admin@example.com` / `admin` (change in `server/.env`).
+- Uploads are stored in `server/uploads/` and served at `http://localhost:4000/uploads/...`.
+- Data is persisted in `server/data.json` (simple JSON DB for MVP).
+
+What I added
+- Backend: `server/index.js`, `server/routes/*`, `server/db_impl.js`, `server/data.json` (sample products), `server/nodemon.json`.
+- Frontend: `src/pages/Admin.tsx`, connected `src/pages/Products.tsx` to API, route `/admin` added.
+
+Next recommended steps
+- Optionally replace file DB with SQLite/Postgres for production.
+- Use Cloudinary/S3 for image storage.
+- Add role-based access if more admins needed.
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

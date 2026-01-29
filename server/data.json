@@ -1,0 +1,56 @@
+{
+  "nextAdminId": 2,
+  "nextProductId": 4,
+  "admins": [
+    {
+      "id": 1,
+      "email": "admin@example.com",
+      "passwordHash": "$2a$10$qcqUzWi48JuQP0BT5Z3Rk.Yth7buwK1ayt/UAsy/6nkAxACh2dO6i",
+      "createdAt": "2026-01-28T17:12:34.225Z"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "test",
+      "description": "opisanie",
+      "price": 1000,
+      "care": "krutoi uhod",
+      "fertilizers": "1. 123123\n2. 123123333",
+      "images": [
+        "/uploads/1769621199494-photo.png"
+      ],
+      "featuredImage": "/uploads/1769621199494-photo.png",
+      "createdAt": "2026-01-28T17:26:42.492Z",
+      "updatedAt": "2026-01-28T17:26:42.492Z"
+    },
+    {
+      "id": 2,
+      "name": "Роза",
+      "description": "Белая роза",
+      "price": 1500,
+      "care": "божественный",
+      "fertilizers": "тестовый",
+      "images": [
+        "/uploads/1769621958060-photo.png"
+      ],
+      "featuredImage": "/uploads/1769621958060-photo.png",
+      "createdAt": "2026-01-28T17:39:43.099Z",
+      "updatedAt": "2026-01-28T17:39:43.099Z"
+    },
+    {
+      "id": 3,
+      "name": "Roza 2",
+      "description": "djfnsdjnfs",
+      "price": 2500,
+      "care": "dsjfnsdjnfs",
+      "fertilizers": "fdsjnfsjdnf",
+      "images": [
+        "/uploads/1769622113322-photo.png"
+      ],
+      "featuredImage": "/uploads/1769622113322-photo.png",
+      "createdAt": "2026-01-28T17:42:54.053Z",
+      "updatedAt": "2026-01-28T17:42:54.053Z"
+    }
+  ]
+}
