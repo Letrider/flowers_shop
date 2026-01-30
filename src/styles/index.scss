@@ -1,3 +1,5 @@
+@import '../assets/fonts/fonts.scss';
+
 * {
   margin: 0;
   padding: 0;
@@ -16,13 +18,3 @@ body {
 	min-height: 100vh;
 }
 
-a {
-	text-decoration: none;
-	color: inherit;
-}
-
-button {
-  cursor: pointer;
-  border: none;
-  font-family: inherit;
-}
