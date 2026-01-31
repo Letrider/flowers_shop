@@ -1,0 +1,40 @@
+.carousel-button {
+	display: flex;
+	align-items: center;
+	width: vh(166);
+	height: vh(99);
+}
+
+.circle {
+	width: vh(99);
+	height: vh(99);
+	border-radius: 100%;
+	top: 0;
+	aspect-ratio: 1/1;
+	border: vh(1) solid #E3E3E3;
+
+	position: absolute;
+
+	&.right {
+		right: 0;
+	}
+
+	&.left {
+		left: 0;
+	}
+}
+
+.longArrow {
+	position: absolute;
+}
+
+.left {
+ 	transform: none;
+	left: vh(40);
+}
+
+.right {
+	right: vh(40);
+	transform: rotate(180deg);
+}
+

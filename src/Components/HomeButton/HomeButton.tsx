@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { SvgArrow } from "./Arrow/Arrow";
+import { SvgArrow } from "../Icons/Arrow/Arrow";
 import s from './HomeButton.module.scss';
 
 interface HomeButtonProps {

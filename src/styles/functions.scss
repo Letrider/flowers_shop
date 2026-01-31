@@ -3,3 +3,7 @@
 @function vh($px, $base-height: 1080) {
   @return #{math.div($px, $base-height) * 100}vh;
 }
+
+@function vwm($px, $base-width: 375) {
+  @return #{math.div($px, $base-width) * 100}vw;
+}

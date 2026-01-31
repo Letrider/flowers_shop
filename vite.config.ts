@@ -8,7 +8,10 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@use "@/styles/functions.scss" as *;`
+        additionalData: `
+          @use "@/styles/functions.scss" as *;
+          @use "@/styles/_breakpoint.scss" as *;
+        `
       }
     }
   },

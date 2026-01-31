@@ -1,6 +1,6 @@
 {
   "nextAdminId": 2,
-  "nextProductId": 4,
+  "nextProductId": 5,
   "admins": [
     {
       "id": 1,
@@ -51,6 +51,20 @@
       "featuredImage": "/uploads/1769622113322-photo.png",
       "createdAt": "2026-01-28T17:42:54.053Z",
       "updatedAt": "2026-01-28T17:42:54.053Z"
+    },
+    {
+      "id": 4,
+      "name": "Монтера",
+      "description": "Супер пупер цветочек",
+      "price": 9100,
+      "care": "Супер пупер уход",
+      "fertilizers": "Какахи",
+      "images": [
+        "/uploads/1769868363001-plant.png"
+      ],
+      "featuredImage": "/uploads/1769868363001-plant.png",
+      "createdAt": "2026-01-31T14:06:06.264Z",
+      "updatedAt": "2026-01-31T14:07:29.637Z"
     }
   ]
 }
