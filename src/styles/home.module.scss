@@ -1,7 +1,7 @@
 .home-page {
     width: 100vw;
     max-height: 100vh;
-    overflow: hidden;
+
 
     @include tablet {
         overflow: scroll;
@@ -74,6 +74,12 @@
     }
 }
 
+.left {
+    @include mobile {
+        display: none;
+    }
+}
+
 .title {
     font-family: 'Manrope';
     font-size: vh(40);
@@ -85,12 +91,14 @@
 .mid {
     width: vh(1100);
     height: vh(960);
-    display: flex;
 
+    display: flex;
+    flex-direction: column;
+    
     @include mobile {
         position: relative;
         width: 100%;
-        height: vh(450);
+        // height: vh(450);
     }
 
 }
@@ -128,6 +136,7 @@
 
 .image {
     width: vh(950);
+    height: vh(1050);
 
     display: flex;
     position: absolute;
@@ -135,12 +144,13 @@
     bottom: vh(-150);
     z-index: 2;
 
-    object-fit: cover;
+    object-fit: contain;
 
     pointer-events: none;
 
     @include mobile {
         width: vh(600);
+        height: vh(530);
         bottom: vh(-60);
     }
 }
@@ -189,4 +199,69 @@
 
         scale: 0.8;
     }
+}
+
+.mid-bottom-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: vh(10);
+    width: 100%;
+
+    user-select: none;
+
+    margin-top: vh(80);
+
+
+    &>a {
+        width: 90%;
+    }
+
+    @include desktop {
+        display: none;
+    }
+}
+
+.mid-bottom-description-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: vh(10);
+    width: 100%;
+    min-height: vh(250);
+    // position: absolute;
+    margin-top: vh(40);
+    bottom: vh(-430);
+    user-select: none;
+
+    &>p {
+        width: 90%;
+    }
+
+    @include desktop {
+        display: none;
+    }
+}
+
+.mid-bottom-carousel-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: vh(10);
+    width: 100%;
+
+    &>button {
+        display: flex;
+    }
+}
+
+.text-first,
+.text-second,
+.mid-bottom-description-mobile,
+.left p,
+.right p {
+  touch-action: pan-y;
 }

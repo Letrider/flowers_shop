@@ -3,6 +3,18 @@
 	align-items: center;
 	width: vh(166);
 	height: vh(99);
+
+	@include mobile {
+		display: none;
+	}
+}
+
+.carousel-button-short {
+	width: vh(99);
+	height: vh(99);
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .circle {
@@ -10,8 +22,7 @@
 	height: vh(99);
 	border-radius: 100%;
 	top: 0;
-	aspect-ratio: 1/1;
-	border: vh(1) solid #E3E3E3;
+	border: vh(2) solid #E3E3E3;
 
 	position: absolute;
 

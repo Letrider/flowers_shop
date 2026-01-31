@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/admin.scss';
 
-const API = (path: string) => `${import.meta.env.VITE_API_BASE || ''}${path}`;
+export const API = (path: string) => `${import.meta.env.VITE_API_BASE || ''}${path}`;
 
 type Product = {
 	id?: number;

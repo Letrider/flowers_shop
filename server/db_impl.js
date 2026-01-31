@@ -17,45 +17,48 @@ function readData() {
 	}
 }
 
+function getHomeCarousel() {
+	const data = readData();
+	console.log(data.homeCarousel);
+	return data.homeCarousel || [];
+}
+
 function writeData(data) {
 	fs.writeFileSync(DATA_PATH, JSON.stringify(data, null, 2), 'utf-8');
 }
 
 function init() {
 	let data = readData();
+
 	if (!data) {
-		data = { nextAdminId: 1, nextProductId: 1, admins: [], products: [] };
+		data = {
+			nextAdminId: 1,
+			nextProductId: 1,
+			admins: [],
+			products: [],
+			homeCarousel: []
+		};
 	}
 
-	if (!data.admins || data.admins.length === 0) {
+	if (!data.admins) data.admins = [];
+	if (!data.products) data.products = [];
+	if (!data.homeCarousel) data.homeCarousel = [];
+
+	if (data.admins.length === 0) {
 		const email = process.env.ADMIN_EMAIL || 'admin@example.com';
 		const pass = process.env.ADMIN_PASSWORD || 'admin';
 		const hash = bcrypt.hashSync(pass, 10);
-		data.admins = [{ id: data.nextAdminId++, email, passwordHash: hash, createdAt: new Date().toISOString() }];
-		console.log('Seeded admin ->', email);
-	}
-
-	if (data.admins && data.admins.length > 0) {
-		const envPass = process.env.ADMIN_PASSWORD || 'admin';
-		let changed = false;
-		data.admins = data.admins.map(a => {
-			if (!a.passwordHash || a.passwordHash === '__SEE_SERVER_ENV__') {
-				const hash = bcrypt.hashSync(envPass, 10);
-				changed = true;
-				return { ...a, passwordHash: hash };
-			}
-			return a;
+		data.admins.push({
+			id: data.nextAdminId++,
+			email,
+			passwordHash: hash,
+			createdAt: new Date().toISOString()
 		});
-		if (changed) writeData(data);
 	}
-
-	if (!data.products) data.products = [];
 
 	writeData(data);
-
-	const uploadDir = path.join(__dirname, process.env.UPLOAD_DIR || 'uploads');
-	if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
 }
+
 
 function getAdminByEmail(email) {
 	const data = readData();
@@ -106,4 +109,4 @@ function deleteProduct(id) {
 	return true;
 }
 
-module.exports = { init, getAdminByEmail, insertAdmin, getAllProducts, getProduct, insertProduct, updateProduct, deleteProduct };
+module.exports = { init, getAdminByEmail, insertAdmin, getAllProducts, getProduct, insertProduct, updateProduct, deleteProduct, getHomeCarousel };

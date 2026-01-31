@@ -16,6 +16,7 @@ app.use('/uploads', express.static(path.join(__dirname, UPLOAD_DIR)));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/products', require('./routes/products'));
 app.use('/api/upload', require('./routes/upload'));
+app.use('/api/home-carousel', require('./routes/homeCarousel'));
 
 const port = process.env.PORT || 4000;
-app.listen(port, () => console.log('Server listening on', port));
+app.listen(port, '0.0.0.0', () => console.log('Server listening on', port));
