@@ -1,15 +1,22 @@
+import { Link } from "react-router-dom";
+import { SvgArrow } from "./Arrow/Arrow";
 import s from './HomeButton.module.scss';
-import { Arrow } from "./Arrow/Arrow";
 
-export const HomeButton = ({ text }) => {
+interface HomeButtonProps {
+  text?: string;
+  link: string;
+}
+
+export const HomeButton = ({ text, link }: HomeButtonProps) => {
+
   return (
-    <div className={s['HomeButton']}>
-        <div className={s['text']}>
-            <p>{text}</p>
-        </div>
-        <div className={s['arrow']}>
-            <Arrow width={'11px'} height={'11px'} />
-        </div>
-    </div>
-  )
+    <Link to={{ pathname: link }} className={s['HomeButton']}>
+      <div className={s['text']}>
+        <p>{text}</p>
+      </div>
+      <div className={s['arrow']}>
+        <SvgArrow className={s['arrow-svg']} />
+      </div>
+    </Link>
+  );
 };

@@ -9,18 +9,18 @@ export const Navbar = () => {
             Главная
         </Link>
         <Link to="/products" className={s['link']}>
-            Товары
+            Каталог
         </Link>
 
         <Link to="/" className={s['logo']}>
             Долина роз
         </Link>
 
-        <Link to="/about" className={s['link']}>
-            О нас
-        </Link>
         <Link to="/contact" className={s['link']}>
             Контакты
+        </Link>
+        <Link to="/about" className={s['link']}>
+            О нас
         </Link>
         </nav>
 

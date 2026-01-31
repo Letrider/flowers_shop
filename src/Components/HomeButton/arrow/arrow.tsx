@@ -1,12 +1,14 @@
+import type React from "react";
+
 interface ArrowProps extends React.SVGProps<SVGSVGElement> {
     className?: string;
     width?: string | number;
     height?: string | number;
 }
-export const Arrow = ({
+export const SvgArrow = ({
     className,  
-    width,
-    height,
+    width = 11,
+    height = 11,
     ...props 
 }: ArrowProps) => {
   return (

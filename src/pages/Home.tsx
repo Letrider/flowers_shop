@@ -1,64 +1,61 @@
 import React from 'react';
-import '../styles/pages.scss';
-import s from '../styles/home.module.scss';
-import { HomeButton } from '../Components/HomeButton/HomeButton';
 import monsterImage from '../../public/plant.png';
+import { HomeButton } from '../components/HomeButton/HomeButton';
+import { Navbar } from "../components/Navbar/Navbar";
+import s from '../styles/home.module.scss';
+import '../styles/pages.scss';
 
-interface HomeProps {
-	text?: string;
-}
 
 
-const Home: React.FC = ({text}: HomeProps) => {
+const Home: React.FC = () => {
 	return (
-		<div className={s['home']}>
+		<div className={s['home-page']}>
 
-			<div className={s['left']}>
-				
-				<h1 className={s['title']}>Описание</h1>
-				<p>популярная тропическая лиана семейства Ароидные с крупными резными листьями, ставшая классикой комнатного озеленения. Она неприхотлива, любит рассеянный свет, регулярный полив и высокую  влажность. Идеально подходит для просторных помещений, очищает воздух и  быстро растет, требуя опоры.</p>
-				
-				<div>
-					<HomeButton text={'Уход за растением'} />
+			<Navbar />
+			<div className={s['home']}>
+
+				<div className={s['left']}>
+
+					<h1 className={s['title']}>Описание</h1>
+					<p>популярная тропическая лиана семейства Ароидные с крупными резными листьями, ставшая классикой комнатного озеленения. Она неприхотлива, любит рассеянный свет, регулярный полив и высокую  влажность. Идеально подходит для просторных помещений, очищает воздух и  быстро растет, требуя опоры.</p>
+
+					<div className={s['buttons-container']}>
+						<HomeButton link="/products" text={'Уход за растением'} />
+						<HomeButton link="/products" text={'Прикормка'} />
+					</div>
 				</div>
 
-				<div>
-					<HomeButton text={'Прикормка'} />
-				</div>
-			</div>
-
-			<div className={s['mid']}>
+				<div className={s['mid']}>
 
 
-				<div className={s['image-container']}>
+					<div className={s['image-container']}>
 
 						<div className={s['circle']}></div>
 
 						<img className={s['image']} src={monsterImage} alt="Монстера" />
 
 						<div className={s['title-mid']}>
-							<p>Монстера</p>
+							<p>МОНСТЕРА</p>
 
 						</div>
-					
+
 					</div>
 
 				</div>
 
 				<div className={s['right']}>
-					<div>
-						<h1 className={s['title']}>Виды</h1>
-					</div>
-					<div>
+					<h1 className={s['title']}>Виды</h1>
+					<div className={s['text-first']}>
 						<p>Наиболее популярна Монстера деликатесная (deliciosa) с гигантскими листьями, для небольших помещений подходит Монстера Борзига (Borsigiana) или «Маска обезьяны» (Monkey Mask).</p>
 					</div>
-					<div>
+					<div className={s['text-second']}>
 						<p>За цветком ухаживать надо бомбово и классно как за собственной женой, машиной, собакой, потом уже только детьми и так далее может быть тут еще поместился бы текст но я не вдупляю че пишу, поэтому такие дела, кстати привет. Настроение сегодня хорошее, востребованное компаниями.</p>
 					</div>
 				</div>
 
 
 			</div>
+		</div>
 	);
 };
 
