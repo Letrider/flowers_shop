@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "motion/react";
 import { HomeButton } from '../components/HomeButton/HomeButton';
-import { Navbar } from "../components/Navbar/Navbar";
+import { Navbar } from "../Components/Navbars/NavbarHome/Navbar";
 import { SmartUnderlinedText } from "../components/SmartUnderliningText/SmartUnderliningText";
 import { CarouselButton } from "../components/UI/Button/components/CarouselButton/CarouselButton";
 import { useHomeCarousel } from '../hooks/useHomeCarousel';

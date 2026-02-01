@@ -1,0 +1,170 @@
+
+.navbar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: vh(40);
+
+    width: 100%;
+    height: vh(250);
+
+    @include mobile {
+        gap: 0;
+    }
+
+    @include tablet {
+        gap: 0;
+    }
+
+}
+
+.link {
+    font-family: 'Manrope', sans-serif;
+    font-size: vh(14);
+    font-weight: 300;
+    text-decoration: none;
+    color: black;
+}
+
+.links {
+    display: flex;
+
+    position: relative;
+}   
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    position: relative;
+
+    @include mobile {
+        margin-top: vh(10);
+    }
+}
+
+.logo {
+    font-family: 'florag';
+    font-size: vh(120);
+    font-weight: normal;
+    flex-direction: row;
+
+    color: black;
+}
+
+.buttons-desktop {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    position: absolute;
+    right: vh(20);
+    gap: vh(10);
+}
+
+.button{
+    width: vh(50);
+    height: vh(50);    
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+
+    background-color: #ffffff;
+    border-radius: vh(50);
+}
+
+.line {
+    width: vh(1839);
+    height: vh(1);
+    background-color: #D7D7D7;
+
+    @include mobile {
+        width: 100%;
+    }
+}
+
+.links-desktop {
+  display: flex;
+  gap: vh(140);
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.burger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  position: absolute;
+  @include mobile {
+    right: vwm(10);
+    // top: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+
+  width: 70%;
+  height: 100vh;
+
+  background-color: #f5f5f5;
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+  padding: vwm(40) vwm(20);
+  gap: vwm(20);
+
+  transition: right .3s ease-out;
+
+  @include mobile { 
+    right: -100%;
+
+    &>header {
+        display: flex;
+        justify-content: flex-end;
+        border-bottom: 1px solid black;
+    }
+  }
+}
+
+.open {
+  right: 0;
+}
+
+.close {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  font-size: vwm(24);
+
+//   margin-bottom: vwm(40);    
+  cursor: pointer;
+}
+
+.mobile-menu .link {
+  font-size: 20px;
+  font-weight: 400;
+}
+

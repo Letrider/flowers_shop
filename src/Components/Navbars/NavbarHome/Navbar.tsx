@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { SvgOption } from "../Icons/Option/Option";
-import { Button } from "../UI/Button/Button";
+import { SvgOption } from "../../Icons/Option/Option";
+import { Button } from "../../UI/Button/Button";
 import s from './Navbar.module.scss';
 
 export const Navbar = () => {
