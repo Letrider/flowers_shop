@@ -34,12 +34,12 @@
 .sidebar .muted { color:#99a0b3; }
 .sidebar-foot { margin-top:10px; }
 
-.editor-panel { flex:1; padding:28px; background:linear-gradient(180deg, #f8fbff 0%, #ffffff 100%); }
+.editor-panel { flex:1; overflow: scroll;  padding:28px; background:linear-gradient(180deg, #f8fbff 0%, #ffffff 100%); }
 .empty { color:#6b7280; font-size:16px; }
 .editor-card { background:#fff; border-radius:12px; padding:20px; box-shadow:0 6px 20px rgba(29,31,39,0.04); max-width:900px; }
 .editor-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
 .editor-actions .btn { margin-left:8px; }
-.editor-body label { display:block; margin-bottom:12px; font-size:14px; color:#333; }
+.editor-body label { display: flex; margin-bottom:12px; font-size:14px; color:#333; }
 .editor-body input, .editor-body textarea { width:100%; padding:10px; border-radius:8px; border:1px solid #e6e9ef; margin-top:6px; }
 .two-cols { display:flex; gap:12px; }
 .two-cols label { flex:1; }

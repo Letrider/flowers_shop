@@ -1,0 +1,46 @@
+.input {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	background-color: #fff;
+
+	width: vh(158);
+	height: vh(89);
+
+	border-radius: vh(40);
+
+	padding-left: vh(38);
+	padding-right: vh(26);
+
+	&>.input__field {
+		width: vh(80);
+
+		font-size: vh(20);
+		color: black;
+		font-family: 'Manrope';
+		font-weight: 600;
+
+		&::-webkit-outer-spin-button,
+		&::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
+	}
+
+	&>.input__upanddown {
+		width: vh(22);
+		height: 40;
+		display: flex;
+		flex-direction: column;
+		gap: vh(17);
+
+		&>svg {
+			cursor: pointer;
+		}
+
+		&>svg:nth-child(1) {
+			transform: rotate(180deg);
+		}
+	}
+}

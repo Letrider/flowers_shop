@@ -1,0 +1,137 @@
+.footer {
+	width: vh(1913);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	padding-top: vh(89);
+	margin-bottom: vh(3.5);
+
+
+	height: vh(1726);
+	background-color: #000000;
+	border-radius: vh(50);
+
+	&>nav {
+		display: flex;
+		gap: vh(78);
+		margin-bottom: vh(74);
+
+		
+		&> a {
+			font-size: vh(31);
+			color: #6A6A6A;
+			cursor: pointer;
+
+			&.active {
+				color: white;
+			}
+		}
+	}
+}
+
+.phone-number {
+	font-size: vh(128);
+	color: white;
+	font-family: 'druzhok';
+}
+
+.address {
+	font-size: vh(32);
+	color: white;
+	margin-bottom: vh(44);
+}
+
+.socials {
+	display: flex;
+	gap: vh(10);
+
+	margin-bottom: vh(88);
+
+	&>.icon {
+		cursor: pointer;
+		width: vh(89);
+		height: vh(89);
+	}
+}
+
+.map {
+width: 100%;
+	height: vh(532);
+	margin-bottom: vh(53);
+}
+
+.logo-text {
+	font-size: vh(264);
+	color: white;
+	font-family: 'florag';
+}
+
+.underfooter {
+	display: flex;
+	position: relative;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.politics {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: absolute;
+	padding-inline: vh(38);
+
+
+	&>span {
+		color: #6A6A6A;
+		font-size: vh(20);
+	cursor: not-allowed;
+
+	}
+}
+
+.payments {
+	width: 100%;
+	gap: vh(20);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+
+	&>.payments-image {
+		position: absolute;
+		left: vh(512);
+		user-select: none;
+		pointer-events: none;
+	}
+
+	&>.flower-image {
+		position: absolute;
+
+		width: vh(526);
+		height: vh(416);
+		right: vh(377);
+
+		user-select: none;
+		pointer-events: none;
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

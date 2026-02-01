@@ -3,6 +3,7 @@ import { API } from "../pages/Admin";
 
 export interface HomeSlide {
 	id: number;
+	uniqueId: string;
 	title: string;
 	description: string;
 	care: string;

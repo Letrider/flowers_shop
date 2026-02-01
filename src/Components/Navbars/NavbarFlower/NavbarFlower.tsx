@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import { SvgOption } from "../../Icons/Option/Option";
 import { Button } from "../../UI/Button/Button";
 import s from './NavbarFlower.module.scss';
-import { SvgSearch } from "../../Icons/Search/Search";
-import { SvgCart } from "../../Icons/Cart/Cart";
 
 export const NavbarFlower = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -16,10 +14,10 @@ export const NavbarFlower = () => {
 
                 <div className={s['links']}>
                     <div className={s['links-desktop']}>
-                            <Link to="/" className={s['link']}>Главная</Link>
-                            <Link to="/products" className={s['link']}>Каталог</Link>
-                            <Link to="/contact" className={s['link']}>Контакты</Link>
-                            <Link to="/about" className={s['link']}>О нас</Link>
+                        <Link to="/" className={s['link']}>Главная</Link>
+                        {/* <Link to="/products" className={s['link']}>Каталог</Link>
+                        <Link to="/contact" className={s['link']}>Контакты</Link>
+                        <Link to="/about" className={s['link']}>О нас</Link> */}
                     </div>
 
                     <Button className={s['burger']} onClick={() => setIsOpen(true)}>
@@ -34,10 +32,10 @@ export const NavbarFlower = () => {
                     </Link>
 
 
-                    <div className={s['buttons-desktop']}>
+                    {/* <div className={s['buttons-desktop']}>
                         <div className={s['button']}><SvgSearch /></div>
                         <div className={s['button']}><SvgCart /></div>
-                    </div>
+                    </div> */}
 
                 </div>
 

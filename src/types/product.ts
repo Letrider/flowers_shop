@@ -4,7 +4,7 @@ export interface Product {
 	description: string;
 	care: string;
 	fertilizers: string;
-	images: string[];
+	image: string;
 	featuredImage?: string;
 }
 

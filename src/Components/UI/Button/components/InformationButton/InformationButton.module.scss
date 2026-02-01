@@ -1,0 +1,33 @@
+.informationButton {
+	transition: .3s all;
+}
+.flower-button {
+    width: vh(655);
+    height: vh(86);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: vh(10);
+
+    border-bottom: vh(1) solid #D7D7D7 ;
+
+    font-size: vh(20);
+    cursor: pointer;
+}
+
+.flower-info {
+	width: vh(533);
+	padding-bottom: vh(30);
+
+	&>p {
+		font-size: vh(40);
+		font-weight: 200;
+		color: #81AA0B;
+	}
+	&>span {
+		font-size: vh(16);
+		font-weight: 300;
+	}
+}

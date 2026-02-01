@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "motion/react";
 import { HomeButton } from '../components/HomeButton/HomeButton';
-import { Navbar } from "../Components/Navbars/NavbarHome/Navbar";
+import { Navbar } from "../components/Navbars/NavbarHome/Navbar";
 import { SmartUnderlinedText } from "../components/SmartUnderliningText/SmartUnderliningText";
 import { CarouselButton } from "../components/UI/Button/components/CarouselButton/CarouselButton";
 import { useHomeCarousel } from '../hooks/useHomeCarousel';
@@ -49,8 +49,8 @@ const Home = () => {
 							exit={{ opacity: 0, x: -50 }}
 							transition={{ duration: 0.4, ease: 'easeOut' }}
 						>
-							<HomeButton link="/products" text="Уход за растением" />
-							<HomeButton link="/products" text="Прикормка" />
+							<HomeButton link={`/flower/${slide.uniqueId}`} text="Уход за растением" />
+							<HomeButton link={`/flower/${slide.uniqueId}`} text="Прикормка" />
 						</motion.div>
 					</AnimatePresence>
 				</div>
@@ -102,6 +102,7 @@ const Home = () => {
 							direction="left"
 							className={s['leftButton']}
 							onClick={prev}
+
 						/>
 						<CarouselButton
 							direction="right"
@@ -111,8 +112,8 @@ const Home = () => {
 
 					</div>
 					<div className={s['mid-bottom-mobile']}>
-						<HomeButton link="/products" text="Уход за растением" />
-						<HomeButton link="/products" text="Прикормка" />
+						<HomeButton link={`/flower/${slide.uniqueId}`} text="Уход за растением" />
+						<HomeButton link={`/flower/${slide.uniqueId}`} text="Прикормка" />
 					</div>
 					<div className={s['mid-bottom-description-mobile']}>
 						<motion.p

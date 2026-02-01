@@ -1,6 +1,7 @@
 .home-page {
     width: 100vw;
     max-height: 100vh;
+    overflow: hidden;
 
 
     @include tablet {
@@ -255,6 +256,10 @@
 
     &>button {
         display: flex;
+    }
+
+    @include desktop {
+        display: none;
     }
 }
 

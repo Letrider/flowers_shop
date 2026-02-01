@@ -1,0 +1,19 @@
+.flower-more {
+	display: flex;
+
+	&__title {
+		width: vh(465);
+		font-family: 'druzhok';
+		text-transform: uppercase;
+		font-size: vh(30);
+		font-weight: 400;
+
+		white-space: pre-line;
+	}
+
+	&__info {
+		width: 100%;
+		font-size: vh(16);
+		font-weight: 200;
+	}
+}

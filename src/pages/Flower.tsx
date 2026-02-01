@@ -1,11 +1,37 @@
 import { useParams } from "react-router-dom";
-import { NavbarFlower } from "../Components/Navbars/NavbarFlower/NavbarFlower";
-import s from '../styles/Flower.module.scss';
+import { FlowerMoreInformation } from "../components/FlowerMoreInformation/FlowerMoreInformation";
+import { FlowersImages } from "../components/FlowersImages/FlowersImages";
+import { Footer } from "../components/Footer/Footer";
 import { SvgShortArrow } from "../components/Icons/ShortArrow/ShortArrow";
-import { ArrowDown } from "../Components/Icons/ArrowDown/ArrowDown";
+import { NavbarFlower } from "../components/Navbars/NavbarFlower/NavbarFlower";
+import { AddToCartButton } from "../components/UI/Button/components/AddToCartButton/AddToCartButton";
+import { InformationButton } from "../components/UI/Button/components/InformationButton/InformationButton";
+import { Input } from "../components/UI/Input/input";
+import { useFlower } from "../hooks/useFlower";
+import { useInformationButtons } from "../hooks/useInformationButtons";
+import s from '../styles/Flower.module.scss';
 
 export const Flower = () => {
-    const { flowerId } = useParams<{ flowerId: string }>();
+    const { openId, toggle } = useInformationButtons();
+
+    const { flowerId } = useParams<{ flowerId: string; }>();
+
+    const { flower } = useFlower(flowerId);
+
+    if (!flower) return <h1>Flower not found</h1>;
+
+    const flowersImages = [
+        'http://localhost:4000/uploads/flowers/1.png',
+        'http://localhost:4000/uploads/flowers/2.png',
+        'http://localhost:4000/uploads/flowers/3.png',
+        'http://localhost:4000/uploads/flowers/4.png',
+        'http://localhost:4000/uploads/flowers/5.png',
+        'http://localhost:4000/uploads/flowers/6.png',
+        'http://localhost:4000/uploads/flowers/7.png',
+        'http://localhost:4000/uploads/flowers/8.png',
+        'http://localhost:4000/uploads/flowers/9.png',
+    ];
+
     return (
         <div className={s['main']}>
             <NavbarFlower />
@@ -13,64 +39,104 @@ export const Flower = () => {
 
                 <div className={s['flower-image']}>
                     <img src={'/listiya.png'} alt="" />
+                    {/* <video src={'/video.mp4'} autoPlay loop controls={false} /> */}
                 </div>
 
                 <div className={s['flower-description']}>
 
+                    {/** left side */}
                     <div className={s['flower-disc']}>
-
                         <div className={s['flower-title']}>
-                            <div className={s['go-back']}>
+                            <a href="/" className={s['go-back']}>
                                 <SvgShortArrow width={14} />
-                            </div>
+                            </a>
                             <div className={s['titles']}>
-                                <h1>Монстера</h1>
-                                <h3>Обыкновенная</h3>
+                                <h1>{flower.name}</h1>
+                                {flower.subName&& <h3>{flower.subName}</h3>}
                             </div>
                         </div>
 
                         <div className={s['flower-text']}>
+                            <InformationButton
+                                id="types"
+                                info={flower.flowerInfo.types}
+                                title="Виды"
+                                isOpen={openId === 'types'}
+                                onToggle={toggle}
+                            />
+                            <InformationButton
+                                id="care"
+                                info={flower.flowerInfo.care}
+                                title="Уход за растениями"
+                                isOpen={openId === 'care'}
+                                onToggle={toggle}
+                            />
 
-                            <div className={s['flower-button']}>
-                                <p>Виды</p>
-                                <ArrowDown />
-                            </div>
-
-                            <div className={s['flower-button']}>
-                                <p>Уход за растением</p>
-                                <ArrowDown />
-                            </div>
-                            <div className={s['flower-button']}>
-                                <p>Прикормка</p>
-                                <ArrowDown />
-                            </div>
-                            <div className={s['flower-button']}>
-                                <p>Польза и особенности</p>
-                                <ArrowDown />
-                            </div>
-
+                            <InformationButton
+                                id="feeding"
+                                info={flower.flowerInfo.feeding}
+                                title="Прикормка"
+                                isOpen={openId === 'feeding'}
+                                onToggle={toggle}
+                            />
+                            <InformationButton
+                                id="benefits"
+                                info={flower.flowerInfo.benefits}
+                                title="Польза и особенности"
+                                isOpen={openId === 'benefits'}
+                                onToggle={toggle}
+                            />
+                        </div>
+                        <div className={s['action-buttons']}>
+                            <Input type="number" />
+                            <AddToCartButton />
                         </div>
                     </div>
 
+                    {/** Right side */}
                     <div className={s['flower']}>
                         <div className={s['flower-state']}>
-                            <div className={`${s['info']} ${s['popular']}`}>
-                                Популярное
-                            </div>
-                            <div className={`${s['info']} ${s['available']}`}>
-                                Есть в наличии
-                            </div>
+                            {flower.isPopular && (
+                                <div className={`${s['info']} ${s['popular']}`}>
+                                    Популярное
+                                </div>
+                            )}
+                            {flower.isAvailable && (
+                                <div className={`${s['info']} ${s['available']}`}>
+                                    Есть в наличии
+                                </div>
+                            )}
                         </div>
 
-                        <div className={s['flower-img']}>
-                            <img src="http://localhost:4000/uploads/monstera.png" alt="Flower" />
-                        </div>
-
+                        <img className={s['flower-img']} src={`http://localhost:4000${flower.image}`} alt="Flower" />
                     </div>
                 </div>
 
+                {/** line */}
+                <div className={s['line']} />
 
+
+                <div className={s['flower-more-information']}>
+                    <FlowerMoreInformation
+                        title={`ЧТТО ТАКОЕ \n ${flower.name.toLocaleUpperCase()}?`}
+                        info={flower.moreInfo.whatIs}
+                    />
+                    <FlowerMoreInformation
+                        title={`ИНТЕРЕСНЫЙ \nФАКТ`}
+                        info={flower.moreInfo.interestFacts}
+                    />
+                    <FlowerMoreInformation
+                        title={`Как ухаживать \nза цветком ${flower.name.toLocaleUpperCase()}?`}
+                        info={flower.moreInfo.howToLookAfter}
+                    />
+                </div>
+
+                <FlowersImages images={flowersImages} />
+
+                <div className={s['line']} />
+
+                <Footer />
             </div>
         </div>
-);
+    );
 };

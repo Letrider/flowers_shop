@@ -1,0 +1,37 @@
+.add-to-cart {
+	width: vh(472);
+	height: vh(89);
+
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-left: vh(38);
+	padding-right: vh(31);
+	// background-color: red;
+
+	user-select: none;
+
+	&>.cart {
+		width: vh(31);
+		height: vh(34);
+	}
+
+
+	&>h1 {
+		font-size: vh(24);
+		font-weight: 400;
+		color: white;
+		z-index: 1000;
+		text-transform: uppercase;
+	}
+}
+
+.union {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: vh(572);
+	height: vh(89);
+	z-index: -1;
+}

@@ -85,7 +85,12 @@ function getProduct(id) {
 
 function insertProduct(payload) {
 	const data = readData();
-	const prod = { id: data.nextProductId++, ...payload, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() };
+	const prod = {
+		id: data.nextProductId++,
+		...payload,
+		createdAt: new Date().toISOString(),
+		updatedAt: new Date().toISOString()
+	};
 	data.products.push(prod);
 	writeData(data);
 	return prod;
@@ -109,4 +114,25 @@ function deleteProduct(id) {
 	return true;
 }
 
-module.exports = { init, getAdminByEmail, insertAdmin, getAllProducts, getProduct, insertProduct, updateProduct, deleteProduct, getHomeCarousel };
+function isUniqueSlug(slug) {
+	const data = readData();
+	return !data.products.some(p => p.uniqueId === slug);
+}
+
+function generateUniqueSlug(base) {
+	let slug = base;
+	let i = 2;
+
+	while (!isUniqueSlug(slug)) {
+		slug = `${base}-${i++}`;
+	}
+
+	return slug;
+}
+
+function getProductBySlug(slug) {
+	const data = readData();
+	return data.products.find(p => p.uniqueId === slug) || null;
+}
+
+module.exports = { init, getAdminByEmail, insertAdmin, getAllProducts, getProduct, insertProduct, updateProduct, deleteProduct, getHomeCarousel, generateUniqueSlug, getProductBySlug };

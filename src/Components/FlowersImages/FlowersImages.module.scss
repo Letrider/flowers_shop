@@ -1,0 +1,78 @@
+.flowers-images {
+	display: flex;
+	justify-content: space-between;
+	padding-inline: vh(40);
+	width: 100%;
+	align-items: flex-start;
+
+	margin-bottom: vh(80);
+
+	&__container {
+		display: flex;
+		align-items: flex-start;
+		gap: vh(15);
+	}
+
+
+	img {
+		object-fit: contain;
+	}
+
+}
+
+.flowers-image {
+
+	&.index0 {
+		width: vh(159);
+		height: vh(159);
+	}
+
+
+	&.index1 {
+		width: vh(158);
+		height: vh(236);
+	}
+
+
+	&.index2 {
+		width: vh(158);
+		height: vh(159);
+	}
+
+
+	&.index3 {
+		width: vh(157);
+		height: vh(333);
+	}
+
+
+	&.index4 {
+		width: vh(157);
+		height: vh(159);
+	}
+
+
+	&.index5 {
+		width: vh(412);
+		height: vh(475);
+	}
+
+
+	&.index6 {
+		width: vh(105);
+		height: vh(95);
+	}
+
+
+	&.index7 {
+		width: vh(105);
+		height: vh(179);
+	}
+
+
+	&.index8 {
+		width: vh(159);
+		height: vh(260);
+	}
+
+}
