@@ -1,5 +1,6 @@
-.informationButton {
+.information{
 	transition: .3s all;
+	width: 100%;
 }
 .flower-button {
     width: vh(655);
@@ -15,6 +16,10 @@
 
     font-size: vh(20);
     cursor: pointer;
+
+	 @include mobile {
+		width: 100%;
+	 }
 }
 
 .flower-info {
@@ -25,9 +30,21 @@
 		font-size: vh(40);
 		font-weight: 200;
 		color: #81AA0B;
+
+		@include mobile {
+			font-size: vh(32);
+		}
 	}
 	&>span {
 		font-size: vh(16);
 		font-weight: 300;
+
+		@include mobile {
+			font-size: vh(16);
+		}
+	}
+
+	@include mobile {
+		width: 100%;
 	}
 }

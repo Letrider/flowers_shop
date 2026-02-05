@@ -13,11 +13,13 @@
 		gap: vh(15);
 	}
 
-
 	img {
 		object-fit: contain;
 	}
 
+	@include mobile {
+		display: none;
+	}
 }
 
 .flowers-image {
@@ -74,5 +76,4 @@
 		width: vh(159);
 		height: vh(260);
 	}
-
 }

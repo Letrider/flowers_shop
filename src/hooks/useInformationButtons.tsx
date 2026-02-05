@@ -5,7 +5,7 @@ export const useInformationButtons = () => {
 
   const toggle = (id: string) => {
     if (openId === id) {
-      setOpenId("");
+      setOpenId(id);
     } else {
       setOpenId(id);
     }

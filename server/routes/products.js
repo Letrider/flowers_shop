@@ -5,13 +5,21 @@ const auth = require('../middleware/auth');
 const { makeSlug } = require('../utils/slug');
 
 router.get('/', (req, res) => {
-	const rows = db.getAllProducts();
+	const page = parseInt(req.query.page) || 1;
+	const limit = parseInt(req.query.limit) || 20;
 
-	res.json(
-		rows.map(r => ({
-			...r
-		}))
-	);
+	const allProducts = db.getAllProducts();
+	const startIndex = (page - 1) * limit;
+	const endIndex = startIndex + limit;
+
+	const paginatedProducts = allProducts.slice(startIndex, endIndex);
+
+	res.json({
+		total: allProducts.length,
+		page,
+		limit,
+		data: paginatedProducts
+	});
 });
 
 router.get('/:id', (req, res) => {
@@ -25,26 +33,16 @@ router.get('/:id', (req, res) => {
 router.post('/', auth, (req, res) => {
 	const {
 		name,
-		description,
-		price,
-		care,
-		fertilizers,
-		images,
-		featuredImage
+		...payloadData
 	} = req.body;
 
 	const baseSlug = makeSlug(name);
 	const uniqueId = db.generateUniqueSlug(baseSlug);
 
 	const payload = {
+		...payloadData,
 		name,
 		uniqueId,
-		description: description || '',
-		price: price || 0,
-		care: care || '',
-		fertilizers: fertilizers || '',
-		images: JSON.stringify(images || []),
-		featuredImage: featuredImage || ''
 	};
 
 	const prod = db.insertProduct(payload);
@@ -55,24 +53,8 @@ router.post('/', auth, (req, res) => {
 
 router.put('/:id', auth, (req, res) => {
 	const {
-		name,
-		description,
-		price,
-		care,
-		fertilizers,
-		images,
-		featuredImage
+		...payload
 	} = req.body;
-
-	const payload = {
-		name,
-		description: description || '',
-		price: price || 0,
-		care: care || '',
-		fertilizers: fertilizers || '',
-		images: JSON.stringify(images || []),
-		featuredImage: featuredImage || ''
-	};
 
 	const prod = db.updateProduct(req.params.id, payload);
 	if (!prod) return res.status(404).json({ error: 'Not found' });

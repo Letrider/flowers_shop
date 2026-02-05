@@ -1,4 +1,4 @@
-import { type Product } from "../types/product";
+import { type Product } from "../types/flower";
 
 const API_URL = 'http://localhost:4000/api';
 

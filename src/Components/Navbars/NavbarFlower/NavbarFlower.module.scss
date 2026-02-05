@@ -19,6 +19,12 @@
 
     @include mobile {
         gap: 0;
+
+        height: vh(150);
+
+        border-bottom: vh(1) solid #D7D7D7;
+
+        margin-bottom: vh(40);
     }
 
     @include tablet {
@@ -61,6 +67,10 @@
     flex-direction: row;
 
     color: black;
+
+    @include mobile {
+      font-size: vh(40);
+    }
 }
 
 .buttons-desktop {
@@ -70,6 +80,14 @@
     position: absolute;
     right: vh(20);
     gap: vh(10);
+
+    @include mobile {
+      top: 0;
+      left: 0;
+      .button {
+        display: none;
+      }
+    }
 }
 
 .button{
@@ -169,3 +187,20 @@
   font-weight: 400;
 }
 
+.burger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  position: absolute;
+  @include mobile {
+    right: vwm(10);
+    // top: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+}

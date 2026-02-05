@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { FlowerMoreInformation } from "../components/FlowerMoreInformation/FlowerMoreInformation";
 import { FlowersImages } from "../components/FlowersImages/FlowersImages";
@@ -15,10 +16,11 @@ export const Flower = () => {
     const { openId, toggle } = useInformationButtons();
 
     const { flowerId } = useParams<{ flowerId: string; }>();
+    const [quantity, setQuantity] = useState(1);
 
     const { flower } = useFlower(flowerId);
 
-    if (!flower) return <h1>Flower not found</h1>;
+    if (!flower) return <h1>Такой цветок не найден..</h1>;
 
     const flowersImages = [
         'http://localhost:4000/uploads/flowers/1.png',
@@ -46,15 +48,31 @@ export const Flower = () => {
 
                     {/** left side */}
                     <div className={s['flower-disc']}>
+                        <div className={s['flower-state-mobile']}>
+                            {flower.isPopular && (
+                                <div className={`${s['info']} ${s['popular']}`}>
+                                    Популярное
+                                </div>
+                            )}
+                            {flower.isAvailable && (
+                                <div className={`${s['info']} ${s['available']}`}>
+                                    Есть в наличии
+                                </div>
+                            )}
+                        </div>
                         <div className={s['flower-title']}>
                             <a href="/" className={s['go-back']}>
                                 <SvgShortArrow width={14} />
                             </a>
                             <div className={s['titles']}>
                                 <h1>{flower.name}</h1>
-                                {flower.subName&& <h3>{flower.subName}</h3>}
+                                {flower.subName && <h3>{flower.subName}</h3>}
                             </div>
                         </div>
+
+
+                        <img className={s['flower-img-mobile']} src={`http://localhost:4000${flower.image}`} alt="Flower" />
+
 
                         <div className={s['flower-text']}>
                             <InformationButton
@@ -88,8 +106,15 @@ export const Flower = () => {
                             />
                         </div>
                         <div className={s['action-buttons']}>
-                            <Input type="number" />
-                            <AddToCartButton />
+                            <Input
+                                min={1}
+                                iconWidth={40}
+                                iconHeight={35}
+                                type="number"
+                                value={quantity}
+                                onChange={e => setQuantity(Number(e.target.value))}
+                            />
+                            <AddToCartButton flower={flower} quantity={quantity} />
                         </div>
                     </div>
 
@@ -110,6 +135,7 @@ export const Flower = () => {
 
                         <img className={s['flower-img']} src={`http://localhost:4000${flower.image}`} alt="Flower" />
                     </div>
+
                 </div>
 
                 {/** line */}

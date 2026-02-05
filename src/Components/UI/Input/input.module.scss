@@ -29,14 +29,16 @@
 	}
 
 	&>.input__upanddown {
-		width: vh(22);
-		height: 40;
+		min-width: vh(32);
+		height: vh(40);
 		display: flex;
 		flex-direction: column;
 		gap: vh(17);
 
 		&>svg {
 			cursor: pointer;
+			width: vh(30);
+			height: vh(40);
 		}
 
 		&>svg:nth-child(1) {

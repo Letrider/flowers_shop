@@ -1,30 +1,7 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useState } from 'react';
-
-export interface FlowerData {
-	id: number;
-	uniqueId: string;
-	name: string;
-	subName: string;
-	description: string;
-	price: number;
-	care: string;
-	fertilizers: string;
-	image: string;
-	flowerInfo: {
-		types: string;
-		care: string;
-		feeding: string;
-		benefits: string;
-	};
-	moreInfo: {
-		whatIs: string;
-		interestFacts: string;
-		howToLookAfter: string;
-	},
-	isPopular: boolean;
-	isAvailable: boolean;
-}
+import { API } from "../pages/Admin";
+import type { FlowerData } from "../types/flower";
 
 export const useFlower = (slug?: string) => {
 	const [flower, setFlower] = useState<FlowerData | null>(null);
@@ -36,7 +13,7 @@ export const useFlower = (slug?: string) => {
 
 		setLoading(true);
 
-		fetch(`http://localhost:4000/api/products/by-slug/${slug}`)
+		fetch(API(`/api/products/by-slug/${slug}`))
 			.then(res => {
 				if (!res.ok) throw new Error('Flower not found');
 				return res.json();

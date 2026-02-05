@@ -19,7 +19,6 @@ function readData() {
 
 function getHomeCarousel() {
 	const data = readData();
-	console.log(data.homeCarousel);
 	return data.homeCarousel || [];
 }
 

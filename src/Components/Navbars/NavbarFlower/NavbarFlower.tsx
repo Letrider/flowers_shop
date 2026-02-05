@@ -1,11 +1,34 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { useCartDropdown } from "../../../hooks/useCartDropdown";
+import { CartDropdown } from "../../CartDropdown/CartDropdown";
+import { SvgCart } from "../../Icons/Cart/Cart";
 import { SvgOption } from "../../Icons/Option/Option";
 import { Button } from "../../UI/Button/Button";
 import s from './NavbarFlower.module.scss';
 
 export const NavbarFlower = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const menuRef = useRef<HTMLDivElement>(null);
+
+    const {
+        isOpen: isCartOpen,
+        open,
+        toggle,
+        cartRef,
+    } = useCartDropdown();
+
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            if (isOpen && menuRef.current && !menuRef.current.contains(e.target as Node)) {
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, [isOpen]);
 
     return (
         <div className={s['navbar-container']}>
@@ -15,8 +38,8 @@ export const NavbarFlower = () => {
                 <div className={s['links']}>
                     <div className={s['links-desktop']}>
                         <Link to="/" className={s['link']}>Главная</Link>
-                        {/* <Link to="/products" className={s['link']}>Каталог</Link>
-                        <Link to="/contact" className={s['link']}>Контакты</Link>
+                        <Link to="/catalog" className={s['link']}>Каталог</Link>
+                        {/* <Link to="/contact" className={s['link']}>Контакты</Link>
                         <Link to="/about" className={s['link']}>О нас</Link> */}
                     </div>
 
@@ -25,6 +48,7 @@ export const NavbarFlower = () => {
                     </Button>
                 </div>
 
+
                 <div className={s['logo-container']}>
 
                     <Link to="/" className={s['logo']}>
@@ -32,18 +56,22 @@ export const NavbarFlower = () => {
                     </Link>
 
 
-                    {/* <div className={s['buttons-desktop']}>
-                        <div className={s['button']}><SvgSearch /></div>
-                        <div className={s['button']}><SvgCart /></div>
-                    </div> */}
+                    <Button className={s['burger']} onClick={() => setIsOpen(true)}>
+                        <SvgOption />
+                    </Button>
 
+
+                    <div className={s['buttons-desktop']} ref={cartRef}>
+                        <div
+                            className={s['button']}
+                            onClick={open}
+                        ><SvgCart /></div>
+                        {isCartOpen && <CartDropdown />}
+                    </div>
                 </div>
-
-
-
             </nav>
 
-            <div className={`${s['mobile-menu']} ${isOpen ? s['open'] : ''}`}>
+            <div ref={menuRef} className={`${s['mobile-menu']} ${isOpen ? s['open'] : ''}`}>
                 <header>
                     <button
                         className={s['close']}
@@ -54,9 +82,13 @@ export const NavbarFlower = () => {
                 </header>
 
                 <Link to="/" className={s['link']} onClick={() => setIsOpen(false)}>Главная<div className={s['line']}></div></Link>
-                <Link to="/products" className={s['link']} onClick={() => setIsOpen(false)}>Каталог <div className={s['line']}></div></Link>
-                <Link to="/contact" className={s['link']} onClick={() => setIsOpen(false)}>Контакты <div className={s['line']}></div></Link>
-                <Link to="/about" className={s['link']} onClick={() => setIsOpen(false)}>О нас <div className={s['line']}></div></Link>
+                <Link to="/catalog" className={s['link']} onClick={() => setIsOpen(false)}>Каталог <div className={s['line']}></div></Link>
+                <Link to="#" className={s['link']} onClick={() => {
+                    setIsOpen(false);
+                    toggle();
+                }}>Открыть корзину
+                    <div className={s['line']}></div>
+                </Link>
             </div>
 
         </div>

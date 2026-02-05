@@ -128,12 +128,29 @@
   background: none;
   border: none;
   font-size: vwm(24);
-
-//   margin-bottom: vwm(40);    
+  
   cursor: pointer;
 }
 
 .mobile-menu .link {
   font-size: 20px;
   font-weight: 400;
+}
+
+
+.buttons-desktop {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    position: absolute;
+    right: vh(20);
+    gap: vh(10);
+
+    @include mobile {
+      top: 0;
+      left: 0;
+      .button {
+        display: none;
+      }
+    }
 }

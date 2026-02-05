@@ -25,6 +25,17 @@
 		z-index: 1000;
 		text-transform: uppercase;
 	}
+
+	@include mobile {
+		width: 100%;
+
+		padding-right: vh(25);
+
+		&>.cart {
+			width: vh(28);
+			height: vh(30);
+		}
+	}
 }
 
 .union {
@@ -34,4 +45,7 @@
 	width: vh(572);
 	height: vh(89);
 	z-index: -1;
+
+	@include mobile {
+	}
 }

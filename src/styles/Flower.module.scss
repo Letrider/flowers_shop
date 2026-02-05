@@ -3,11 +3,12 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    overflow-x: hidden;
+    // overflow-x: hidden;
 
 }
 
 .main-content {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -23,6 +24,19 @@
         height: vh(391);
         object-fit: cover;
     }
+
+    @include mobile {
+        display: none;
+        height: vh(200);
+
+        margin-bottom: vh(20);
+
+        &>img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
 }
 
 .flower-title {
@@ -30,6 +44,26 @@
 
     display: flex;
     gap: vh(20);
+
+    @include mobile {
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+}
+
+.flower-text {
+
+
+    transition: .3s all;
+    @include mobile {
+        display: flex;
+        flex-direction: column;
+
+		width: vwm(320);
+        // min-height: vh(500);
+        transition: .3s all;
+    }
 }
 
 .go-back {
@@ -44,6 +78,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @include mobile {
+        display: none;
+    }
 }
 
 .titles {
@@ -54,6 +92,10 @@
 .titles > h1 {
     font-size: vh(190);
     text-transform: uppercase;
+
+    @include mobile {
+        font-size: vh(80);
+    }
 }
 
 .titles > h3 {
@@ -61,6 +103,23 @@
     text-transform: uppercase;
     position: relative;
     top: vh(-40);
+
+    @include mobile {
+        font-size: vh(50);
+        top: vh(-20);
+    }
+}
+
+.flower-disc {
+    
+    @include mobile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+
+
+    }
 }
 
 .flower-description {
@@ -70,6 +129,12 @@
     justify-content: space-between;
 
     padding-inline: vh(40);
+
+    @include mobile {
+        flex-direction: column;
+        align-items: center;
+
+    }
 }
 
 .flower {
@@ -80,6 +145,10 @@
     flex-direction: column;
     
     position: relative;
+
+    @include mobile {
+        display: none;
+    }
 }
 
 .flower-state {
@@ -87,7 +156,34 @@
     justify-content: end;
     align-items: start;
     gap: vh(5);
+
+    @include mobile {
+        display: none;
+    }
+
+
 }   
+
+.flower-state-mobile {
+    display: none;
+
+    @include mobile {
+        display: flex;
+        justify-content: end;
+        align-items: start;
+        gap: vh(5);
+        
+        margin-bottom: vh(20);
+
+        &>.info {
+            width: vwm(120);
+            height: vwm(40);
+
+            font-size: vwm(12);
+        }
+    }
+
+}
 
 
 .info {
@@ -103,6 +199,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
 
 .popular {
@@ -123,6 +220,23 @@
 
     pointer-events: none;
     user-select: none;
+
+    @include mobile {
+        display: none;
+        min-width: 100%;
+        height: vh(450);
+    }
+}
+
+.flower-img-mobile {
+    display: none;
+
+    @include mobile {
+        display: flex;
+        justify-content: center;
+
+        width: vh(400);
+    }
 }
 
 .action-buttons {
@@ -130,6 +244,13 @@
     gap: vh(25);
     margin-top: vh(72);
     margin-bottom: vh(235);
+
+    @include mobile {
+        width: 100%;
+        margin-top: vh(30);
+        flex-direction: column;
+        margin-bottom: vh(80);
+    }
 }
 
 
@@ -148,6 +269,8 @@
     display: flex;
     flex-direction: column;
     gap: vh(80);
+
+    width: 100%;
     padding-inline: vh(40);
 
     margin-bottom: vh(80);
