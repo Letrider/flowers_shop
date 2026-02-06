@@ -79,6 +79,7 @@
   cursor: pointer;
 
   position: absolute;
+
   @include mobile {
     right: vwm(10);
     // top: 50%;
@@ -88,6 +89,9 @@
     align-items: center;
   }
 
+  @include tablet {
+    display: none;
+  }
 }
 
 .mobile-menu {

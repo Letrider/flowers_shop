@@ -1,50 +1,68 @@
-.information{
-	transition: .3s all;
-	width: 100%;
+.information {
+    transition: .3s all;
+    width: 100%;
 }
+
 .flower-button {
     width: vh(655);
     height: vh(86);
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     gap: vh(10);
-
     border-bottom: vh(1) solid #D7D7D7 ;
-
     font-size: vh(20);
     cursor: pointer;
 
-	 @include mobile {
-		width: 100%;
-	 }
+    @include mobile {
+        width: 100%;
+    }
+
+    @include tablet {
+        width: 100%;
+
+      //   width: vh(500);
+        height: vh(70);
+        font-size: vh(18);
+    }
 }
 
 .flower-info {
-	width: vh(533);
-	padding-bottom: vh(30);
+    width: vh(533);
+    padding-bottom: vh(30);
 
-	&>p {
-		font-size: vh(40);
-		font-weight: 200;
-		color: #81AA0B;
+    &>p {
+        font-size: vh(40);
+        font-weight: 200;
+        color: #81AA0B;
 
-		@include mobile {
-			font-size: vh(32);
-		}
-	}
-	&>span {
-		font-size: vh(16);
-		font-weight: 300;
+        @include mobile {
+            font-size: vh(32);
+        }
 
-		@include mobile {
-			font-size: vh(16);
-		}
-	}
+        @include tablet {
+            font-size: vh(36);
+        }
+    }
 
-	@include mobile {
-		width: 100%;
-	}
+    &>span {
+        font-size: vh(16);
+        font-weight: 300;
+
+        @include mobile {
+            font-size: vh(16);
+        }
+
+        @include tablet {
+            font-size: vh(18);
+        }
+    }
+
+    @include mobile {
+        width: 100%;
+    }
+
+    @include tablet {
+        width: 100%;
+    }
 }

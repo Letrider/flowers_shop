@@ -1,196 +1,251 @@
 .footer {
-	width: vh(1913);
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+    width: vh(1913);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-	padding-top: vh(89);
-	margin-bottom: vh(3.5);
+    padding-top: vh(89);
+    margin-bottom: vh(3.5);
 
+    height: vh(1726);
+    background-color: #000000;
+    border-radius: vh(50);
 
-	height: vh(1726);
-	background-color: #000000;
-	border-radius: vh(50);
+    &>nav {
+        display: flex;
+        gap: vh(78);
+        margin-bottom: vh(74);
 
+        &> a {
+            font-size: vh(31);
+            color: #6A6A6A;
+            cursor: pointer;
 
-	&>nav {
-		display: flex;
-		gap: vh(78);
-		margin-bottom: vh(74);
+            &.active {
+                color: white;
+            }
+        }
+    }
 
-		
-		&> a {
-			font-size: vh(31);
-			color: #6A6A6A;
-			cursor: pointer;
+    @include mobile {
+        width: 100%;
+        height: vh(1200);
+        padding-bottom: vh(10);
+    }
 
-			&.active {
-				color: white;
-			}
-		}
+    @include tablet {
+        width: 100%;
+        height: vh(1400);
+        padding-bottom: vh(20);
 
+        &>nav {
+            gap: vh(40);
 
-	}
-
-	@include mobile {
-		width: 100%;
-
-		height: vh(1200);
-
-		padding-bottom: vh(10);
-	}
+            &> a {
+                font-size: vh(24);
+            }
+        }
+    }
 }
 
 .phone-number {
-	font-size: vh(128);
-	color: white;
-	font-family: 'druzhok';
+    font-size: vh(128);
+    color: white;
+    font-family: 'druzhok';
 
-	@include mobile {
-		font-size: vwm(40);
-	}
+    @include mobile {
+        font-size: vwm(40);
+    }
+
+    @include tablet {
+        font-size: vh(80);
+    }
 }
 
 .address {
-	font-size: vh(32);
-	color: white;
-	margin-bottom: vh(44);
+    font-size: vh(32);
+    color: white;
+    margin-bottom: vh(44);
 
-	@include mobile {
-		font-size: vh(24);
+    @include mobile {
+        font-size: vh(24);
+        padding-inline: vh(40);
+    }
 
-		padding-inline: vh(40);
-	}
+    @include tablet {
+        font-size: vh(28);
+        padding-inline: vh(30);
+        margin-bottom: vh(30);
+    }
 }
 
 .socials {
-	display: flex;
-	gap: vh(10);
+    display: flex;
+    gap: vh(10);
+    margin-bottom: vh(88);
 
-	margin-bottom: vh(88);
+    &>.icon {
+        cursor: pointer;
+        width: vh(89);
+        height: vh(89);
+    }
 
-	&>.icon {
-		cursor: pointer;
-		width: vh(89);
-		height: vh(89);
-	}
+    @include mobile {
+        margin-bottom: vh(50);
+    }
 
-	@include mobile {
-		margin-bottom: vh(50);
-	}
+    @include tablet {
+        margin-bottom: vh(60);
+
+        &>.icon {
+            width: vh(60);
+            height: vh(60);
+        }
+    }
 }
 
 .map {
-	width: 100%;
-	height: vh(532);
-	margin-bottom: vh(53);
+    width: 100%;
+    height: vh(532);
+    margin-bottom: vh(53);
+    object-fit: cover;
 
-	object-fit: cover;
-	@include mobile {
-		margin-bottom: vh(50);
-	}
+    @include mobile {
+        margin-bottom: vh(50);
+    }
+
+    @include tablet {
+        height: vh(400);
+        margin-bottom: vh(40);
+    }
 }
 
 .logo-text {
-	font-size: vh(264);
-	color: white;
-	font-family: 'florag';
+    font-size: vh(264);
+    color: white;
+    font-family: 'florag';
 
-	@include mobile {
-		font-size: vwm(52);
-	}
+    @include mobile {
+        font-size: vwm(52);
+    }
+
+    @include tablet {
+        font-size: vh(120);
+    }
 }
 
 .underfooter {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: 100%;
-	height: vh(200);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: vh(200);
+    overflow: hidden;
 
-	overflow: hidden;
+    @include mobile {
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+    }
 
-	@include mobile {
-		flex-direction: column;
-		justify-content: space-evenly;
-		align-items: center;
-	}
+    @include tablet {
+        flex-direction: column;
+        justify-content: space-between;
+        height: vh(180);
+    }
 }
 
 .politics {
-	width: 100%;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	position: absolute;
-	padding-inline: vh(38);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    padding-inline: vh(38);
 
+    &>span {
+        color: #6A6A6A;
+        font-size: vh(20);
+        cursor: not-allowed;
+    }
 
-	&>span {
-		color: #6A6A6A;
-		font-size: vh(20);
-		cursor: not-allowed;
+    @include mobile {
+        position: relative;
+        flex-direction: column;
+        align-items: center;
+        height: vh(100);
+        gap: vh(10);
+    }
 
-	}
-
-	@include mobile {
-		position: relative;
-		flex-direction: column;
-		align-items: center;
-
-		height: vh(100);
-
-		gap: vh(10);
-	}
+    @include tablet {
+        position: relative;
+        flex-direction: column;
+        align-items: center;
+        height: vh(120);
+        gap: vh(10);
+    }
 }
 
 .payments {
-	width: 100%;
-	gap: vh(20);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: absolute;
+    width: 100%;
+    gap: vh(20);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
 
-	&>.payments-image {
-		position: absolute;
-		// left: vh(512);
-		user-select: none;
-		pointer-events: none;
-	}
+    &>.payments-image {
+        position: absolute;
+        user-select: none;
+        pointer-events: none;
+    }
 
-	&>.flower-image {
-		position: absolute;
+    &>.flower-image {
+        position: absolute;
+        width: vh(526);
+        height: vh(416);
+        right: vh(377);
+        user-select: none;
+        pointer-events: none;
+    }
 
-		width: vh(526);
-		height: vh(416);
-		right: vh(377);
+    @include mobile {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        height: vh(100);
 
-		user-select: none;
-		pointer-events: none;
-	}
+        &>.payments-image {
+            left: 0;
+            transform: translateX(50%);
+            bottom: 0;
+            user-select: none;
+            pointer-events: none;
+        }
 
-	@include mobile {
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
+        &>.flower-image {
+            display: none;
+        }
+    }
 
-		position: relative;
+    @include tablet {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        height: vh(120);
 
-		height: vh(100);
+        &>.payments-image {
+            left: 0;
+            transform: translateX(40%);
+            bottom: 0;
+        }
 
-		&>.payments-image {
-			left: 0;
-			transform: translateX(50%);
-			bottom: 0;
-			user-select: none;
-			pointer-events: none;
-		}
-
-		&>.flower-image {
-			display: none;
-		}
-	}
-
+        &>.flower-image {
+            width: vh(300);
+            height: vh(240);
+            right: vh(200);
+        }
+    }
 }
-

@@ -5,6 +5,9 @@
     flex-direction: column;
     // overflow-x: hidden;
 
+    @include tablet {
+        padding-inline: vh(20);
+    }
 }
 
 .main-content {
@@ -13,6 +16,10 @@
     flex-direction: column;
     align-items: center;
     margin: 0;
+
+    @include tablet {
+        width: 95%;
+    }
 }
 
 .flower-image {
@@ -28,8 +35,18 @@
     @include mobile {
         display: none;
         height: vh(200);
-
         margin-bottom: vh(20);
+
+        &>img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    @include tablet {
+        height: vh(300);
+        margin-bottom: vh(30);
 
         &>img {
             width: 100%;
@@ -41,7 +58,6 @@
 
 .flower-title {
     font-family: 'druzhok', sans-serif;
-
     display: flex;
     gap: vh(20);
 
@@ -50,37 +66,55 @@
         align-items: center;
         width: 100%;
     }
+
+    @include tablet {
+        width: 100%;
+        justify-content: space-between;
+        // align-items: center;
+        gap: vh(15);
+    }
 }
 
 .flower-text {
-
-
     transition: .3s all;
+
     @include mobile {
         display: flex;
         flex-direction: column;
-
-		width: vwm(320);
-        // min-height: vh(500);
+        width: vwm(320);
         transition: .3s all;
+    }
+
+    @include tablet {
+        display: flex;
+        flex-direction: column;
+        width: vwm(250);
     }
 }
 
 .go-back {
     width: vh(60);
     height: vh(60); 
-
     cursor: pointer;
-
     border-radius: vh(50);
     border: 1px solid #E3E3E3;
-
     display: flex;
     justify-content: center;
     align-items: center;
 
     @include mobile {
         display: none;
+    }
+
+    @include tablet {
+        display: flex;
+        width: vh(80);
+        height: vh(80);
+    }
+
+    &-icon {
+            width: vh(24);
+            height: vh(15);
     }
 }
 
@@ -96,6 +130,10 @@
     @include mobile {
         font-size: vh(80);
     }
+
+    @include tablet {
+        font-size: vh(120);
+    }
 }
 
 .titles > h3 {
@@ -108,17 +146,26 @@
         font-size: vh(50);
         top: vh(-20);
     }
+
+    @include tablet {
+        font-size: vh(60);
+        top: vh(-30);
+    }
 }
 
 .flower-disc {
-    
     @include mobile {
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 100%;
+    }
 
-
+    @include tablet {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
     }
 }
 
@@ -127,27 +174,35 @@
     min-height: vh(1220);
     display: flex;
     justify-content: space-between;
-
     padding-inline: vh(40);
 
     @include mobile {
         flex-direction: column;
         align-items: center;
+    }
 
+    @include tablet {
+        flex-direction: column;
+        align-items: center;
+        min-height: vh(900);
+
+        padding-inline: vh(0);
     }
 }
 
 .flower {
     width: 100%;
     height: vh(500);
-
     display: flex;
     flex-direction: column;
-    
     position: relative;
 
     @include mobile {
         display: none;
+    }
+
+    @include tablet {
+       display: none;
     }
 }
 
@@ -161,7 +216,10 @@
         display: none;
     }
 
-
+    @include tablet {
+        display: flex;
+        gap: vh(5);
+    }
 }   
 
 .flower-state-mobile {
@@ -172,34 +230,41 @@
         justify-content: end;
         align-items: start;
         gap: vh(5);
-        
         margin-bottom: vh(20);
 
         &>.info {
             width: vwm(120);
             height: vwm(40);
-
             font-size: vwm(12);
         }
     }
 
-}
+    @include tablet {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: start;
+        margin-bottom: vh(20);
+        gap: vh(20);
 
+        &>.info {
+            width: vwm(100);
+            height: vwm(30);
+            font-size: vwm(10);
+        }
+    }
+}
 
 .info {
     width: vh(125);
     height: vh(35);
-
     border-radius: vh(50);
     font-size: vh(12);
     font-weight: bold;
-
     color: #ffffff;
-
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
 
 .popular {
@@ -213,11 +278,9 @@
 .flower-img {
     position: absolute;
     right: vh(-50);
-
     min-width: vh(1285);
     height: vh(1149);
     object-fit: contain;
-
     pointer-events: none;
     user-select: none;
 
@@ -225,6 +288,13 @@
         display: none;
         min-width: 100%;
         height: vh(450);
+    }
+
+    @include tablet {
+        display: flex;
+        right: vh(-20);
+        min-width: vh(800);
+        height: vh(600);
     }
 }
 
@@ -234,8 +304,13 @@
     @include mobile {
         display: flex;
         justify-content: center;
-
         width: vh(400);
+    }
+
+    @include tablet {
+        display: flex;
+        justify-content: center;
+        width: vh(500);
     }
 }
 
@@ -251,28 +326,42 @@
         flex-direction: column;
         margin-bottom: vh(80);
     }
+
+    @include tablet {
+        width: 90%;
+        margin-top: vh(50);
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: vh(20);
+        margin-bottom: vh(150);
+    }
 }
 
-
 // line
-
 .line {
     padding-inline: vh(40);
     width: calc(100% - vh(40));
     height: vh(1);
     background-color: #D7D7D7;
-    
     margin-bottom: vh(83);
+
+    @include tablet {
+        padding-inline: vh(30);
+        width: calc(100% - vh(30));
+    }
 }
 
 .flower-more-information {
     display: flex;
     flex-direction: column;
     gap: vh(80);
-
     width: 100%;
     padding-inline: vh(40);
-
     margin-bottom: vh(80);
 
+    @include tablet {
+        padding-inline: vh(30);
+        gap: vh(60);
+        margin-bottom: vh(60);
+    }
 }

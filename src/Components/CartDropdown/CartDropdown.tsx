@@ -2,9 +2,9 @@ import { AnimatePresence, motion } from "motion/react";
 import { useEffect } from "react";
 import { useCart } from "../../context/CartContext";
 import { useCartDropdown } from "../../hooks/useCartDropdown";
-import { SvgClose } from "../Icons/Close/Close";
 import s from "./CartDropdown.module.scss";
 import { Card } from "./components/Card";
+import { SvgClose } from "../Icons/Close/Close";
 
 export const CartDropdown = () => {
 	const {
@@ -39,6 +39,7 @@ export const CartDropdown = () => {
 							<span className={s['total-price']}>{totalPrice} ₽</span>
 
 							<h1 className={s['in-cart']}>В КОРЗИНЕ:</h1>
+						
 							<SvgClose className={s['close-icon']} onClick={close} />
 						</div>
 

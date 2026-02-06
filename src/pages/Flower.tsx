@@ -62,7 +62,7 @@ export const Flower = () => {
                         </div>
                         <div className={s['flower-title']}>
                             <a href="/" className={s['go-back']}>
-                                <SvgShortArrow width={14} />
+                                <SvgShortArrow className={s['go-back-icon']} />
                             </a>
                             <div className={s['titles']}>
                                 <h1>{flower.name}</h1>
