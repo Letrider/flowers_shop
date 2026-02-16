@@ -8,13 +8,14 @@ type Props = {
 
 const CheckboxField: React.FC<Props> = ({ label, checked, onChange }) => {
 	return (
-		<label className="checkbox">
-			{label}
+		<label className="checkbox-field">
 			<input
 				type="checkbox"
 				checked={checked}
 				onChange={e => onChange(e.target.checked)}
+				className="checkbox-input"
 			/>
+			<span className="checkbox-label">{label}</span>
 		</label>
 	);
 };

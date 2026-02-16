@@ -3,7 +3,6 @@
     max-height: 100vh;
     overflow: hidden;
 
-
     @include tablet {
         overflow: scroll;
     }
@@ -24,12 +23,21 @@
         flex-direction: column;
     }
 
+    @include tablet {
+        flex-direction: column;
+        justify-content: flex-start;
+
+    }
 }
 
 .container {
     width: 90%;
     height: vh(1004);
     overflow: hidden;
+
+    // @include tablet {
+    //     height: vh(800);
+    // }
 }
 
 .left, .right {
@@ -41,35 +49,55 @@
     &>p {
         line-height: vh(28);
         font-size: vh(16);
-
         margin-bottom: vh(85);
 
         @include mobile {
             margin-bottom: vh(20);
+        }
+
+        @include tablet {
+            margin-bottom: vh(40);
+            font-size: vh(14);
         }
     }
 
     @include mobile {
         display: none;
     }
+
+    @include tablet {
+        display: none;
+    }
 }
 
 .right {
-
     &>.title {
         margin-bottom: 0;
         font-size: vh(40);
+
+        @include tablet {
+            font-size: vh(32);
+        }
     }
 
     .text-first {
         line-height: vh(28);
         margin-bottom: vh(42);
         font-size: vh(16);
+
+        @include tablet {
+            font-size: vh(14);
+            margin-bottom: vh(20);
+        }
     }
 
     .text-second {
         line-height: vh(28);
         font-size: vh(16);
+
+        @include tablet {
+            font-size: vh(14);
+        }
     }
 }
 
@@ -77,29 +105,41 @@
     @include mobile {
         display: none;
     }
+
+    @include tablet {
+       display: none;
+    }
 }
 
 .title {
     font-family: 'Manrope';
     font-size: vh(40);
-
-
     margin-bottom: vh(5);
+
+    @include tablet {
+        font-size: vh(32);
+    }
 }
 
 .mid {
     width: vh(1100);
     height: vh(960);
-
     display: flex;
     flex-direction: column;
-    
+
     @include mobile {
         position: relative;
         width: 100%;
-        // height: vh(450);
     }
 
+    @include tablet {
+        justify-content: center;
+        align-items: center;
+        width: vh(800);
+        height: vh(960);
+
+        padding-top: vh(55);
+    }
 }
 
 .image-container {
@@ -116,6 +156,12 @@
         width: 100%;
         height: vh(450);
     }
+
+    @include tablet {
+        width: vh(800);
+        position: relative;
+        bottom: 0;
+    }
 }
 
 .circle {
@@ -123,7 +169,6 @@
     height: vh(814);
     border-radius: 50%;
     background-color: #ffffff;
-
     position: absolute;
     top: 0;
 
@@ -131,26 +176,37 @@
         width: vh(450);
         height: vh(450);
     }
+
+    @include tablet {
+        width: vh(600);
+        height: vh(600);
+
+        z-index: -2;
+    }
 }
 
 .image {
     width: vh(950);
     height: vh(1050);
-
     display: flex;
     position: absolute;
-
     bottom: vh(-150);
     z-index: 2;
-
     object-fit: contain;
-
     pointer-events: none;
 
     @include mobile {
         width: vh(600);
         height: vh(530);
         bottom: vh(-60);
+    }
+
+    @include tablet {
+        width: vh(600);
+        height: vh(550);
+        bottom: vh(-170);
+
+        z-index: 0;
     }
 }
 
@@ -164,12 +220,23 @@
     @include mobile {
         font-size: vh(92);
     }
+
+    @include tablet {
+        font-size: vh(160);
+        z-index: -1;
+    }
 }
 
 .buttons-container {
     display: flex;
     flex-direction: column;
     gap: vh(10);
+    position: relative;
+
+    @include tablet {
+        gap: vh(8);
+        z-index: 3;
+    }
 }
 
 .leftButton {
@@ -181,8 +248,13 @@
     @include mobile {
         bottom: vh(-40);
         left: vh(20);
-
         scale: 0.8;
+    }
+
+    @include tablet {
+        bottom: vh(20);
+        left: vh(40);
+        scale: 0.9;
     }
 }
 
@@ -195,48 +267,50 @@
     @include mobile {
         bottom: vh(-40);
         right: vh(20);
-
         scale: 0.8;
+    }
+
+    @include tablet {
+        bottom: vh(20);
+        right: vh(40);
+        scale: 0.9;
     }
 }
 
 .mid-bottom-mobile {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center;    
     justify-content: center;
-
     gap: vh(10);
     width: 100%;
-
     user-select: none;
-
-    margin-top: vh(80);
-
-
-    &>a {
-        width: 90%;
-    }
 
     @include desktop {
         display: none;
     }
 }
 
+.mid-bottom-mobile {
+    margin-top: vh(80);
+    &>a {
+        width: 90%;
+    }
+}
+
 .mid-bottom-description-mobile {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: vh(10);
-    width: 100%;
+    justify-content: center;
     min-height: vh(250);
-    // position: absolute;
     margin-top: vh(40);
     bottom: vh(-430);
-    user-select: none;
-
     &>p {
         width: 90%;
+        font-size: vh(20);
+    }
+
+    @include tablet {
+        width: 100%;
     }
 
     @include desktop {
@@ -245,18 +319,11 @@
 }
 
 .mid-bottom-carousel-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: vh(10);
-    width: 100%;
-
     &>button {
         display: flex;
     }
 
-    @include desktop {
+    @include tablet {
         display: none;
     }
 }
@@ -266,5 +333,5 @@
 .mid-bottom-description-mobile,
 .left p,
 .right p {
-  touch-action: pan-y;
+    touch-action: pan-y;
 }

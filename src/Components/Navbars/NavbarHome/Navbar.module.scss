@@ -8,6 +8,10 @@
     width: 100%;
     margin-bottom: vh(55);
 
+    @include tablet {
+      margin: 0;
+    }
+
 }
 
 .navbar {

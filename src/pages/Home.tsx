@@ -5,6 +5,7 @@ import { SmartUnderlinedText } from "../components/SmartUnderliningText/SmartUnd
 import { CarouselButton } from "../components/UI/Button/components/CarouselButton/CarouselButton";
 import { useHomeCarousel } from '../hooks/useHomeCarousel';
 import s from '../styles/home.module.scss';
+import { API } from "./Admin";
 
 const Home = () => {
 	const { next, prev, slide } = useHomeCarousel();
@@ -62,7 +63,7 @@ const Home = () => {
 						<AnimatePresence mode="wait">
 							<motion.img
 								key={slide.id + '-image'}
-								src={slide.image}
+								src={API(slide.image)}
 								alt={slide.title}
 								className={s['image']}
 								initial={{ opacity: 0, scale: 0.9, x: 50 }}

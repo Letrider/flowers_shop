@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { FiLink, FiTrash2 } from 'react-icons/fi';
+import CarouselEditor from "../components/AdminComponents/CarouselEditor";
 import FlowerEditor from "../components/AdminComponents/FlowerEditor";
 import FlowerViewer from "../components/AdminComponents/FlowerViewer";
 import { useToast } from "../components/AdminComponents/hooks/useToast";
@@ -38,6 +39,30 @@ const emptyFlower: FlowerData = {
 	isAvailable: true
 };
 
+type ProductRowProps = {
+	product: FlowerData;
+	onSelect: (flower: FlowerData) => void;
+	onCopyLink: (flower: FlowerData) => void;
+	onDelete: (id: number) => void;
+	apiBase: (path: string) => string;
+};
+
+const ProductRow = React.memo<ProductRowProps>(({ product, onSelect, onCopyLink, onDelete, apiBase }) => (
+	<div className="product-row">
+		<div className="product-row-left" onClick={() => onSelect(product)}>
+			<img src={product.image ? apiBase(product.image) : '/'} alt="" />
+			<div className="product-info">
+				<div className="name">{product.name}</div>
+				<div className="price">{product.price} ₽</div>
+			</div>
+		</div>
+		<div className="product-actions">
+			<button className="btn small" onClick={() => onCopyLink(product)}><FiLink /></button>
+			<button className="btn small danger" onClick={() => onDelete(product.id)}><FiTrash2 /></button>
+		</div>
+	</div>
+));
+
 const Admin = () => {
 	const [token, setToken] = useState<string | null>(() => localStorage.getItem("admin_token"));
 	const [email, setEmail] = useState('');
@@ -47,6 +72,7 @@ const Admin = () => {
 	const [loading, setLoading] = useState(false);
 	const [isEditing, setIsEditing] = useState(false);
 	const [search, setSearch] = useState('');
+	const [activeTab, setActiveTab] = useState<'products' | 'carousel'>('products');
 
 	const { success, error } = useToast();
 
@@ -72,7 +98,8 @@ const Admin = () => {
 		setLoading(true);
 		try {
 			const res = await fetch(API('/api/products'));
-			setProducts(await res.json());
+			const json = await res.json();
+			setProducts(Array.isArray(json) ? json : json.data || []);
 		} finally {
 			setLoading(false);
 		}
@@ -97,7 +124,8 @@ const Admin = () => {
 		} catch (e) {
 			error("Не удалось сохранить товар: " + e);
 		}
-	}, [editing, token]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [editing, token, fetchProducts]);
 
 	const deleteProduct = useCallback(async (id: number) => {
 		if (!token) return;
@@ -115,14 +143,19 @@ const Admin = () => {
 		} catch (e) {
 			error("Не удалось удалить товар: " + e);
 		}
-	}, [token, editing]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [token, editing, fetchProducts]);
 
 	useEffect(() => {
 		if (token) fetchProducts();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [token]);
+
+	useEffect(() => {
 		const listener = () => save();
 		document.addEventListener("saveFlower", listener);
 		return () => document.removeEventListener("saveFlower", listener);
-	}, [token, editing]);
+	}, [save]);
 
 	const filteredProducts = useMemo(
 		() => products.filter(p => p.name.toLowerCase().includes(search.toLowerCase())),
@@ -140,21 +173,7 @@ const Admin = () => {
 		setIsEditing(false);
 	}, []);
 
-	const MemoProductRow = React.memo(({ product }: { product: FlowerData; }) => (
-		<div key={product.uniqueId} className="product-row">
-			<div className="product-row-left" onClick={() => handleSelectFlower(product)}>
-				<img src={product.image ? API(product.image) : '/'} alt="" />
-				<div className="product-info">
-					<div className="name">{product.name}</div>
-					<div className="price">{product.price} ₽</div>
-				</div>
-			</div>
-			<div className="product-actions">
-				<button className="btn small" onClick={() => handleCopyLink(product)}><FiLink /></button>
-				<button className="btn small danger" onClick={() => deleteProduct(product.id)}><FiTrash2 /></button>
-			</div>
-		</div>
-	));
+
 
 	return (
 		<div className="admin-root">
@@ -181,22 +200,51 @@ const Admin = () => {
 					{/* Sidebar */}
 					<aside className="sidebar">
 						<div className="brand">Панель управления Администратора</div>
-						<button className="btn" onClick={() => setEditing(structuredClone(emptyFlower))}>
-							+ Добавить товар
-						</button>
 
-						<input
-							className="search-input"
-							placeholder="Поиск..."
-							value={search}
-							onChange={e => setSearch(e.target.value)}
-						/>
-
-						<div className="products-list">
-							{loading ? <div className="muted">Загрузка...</div> :
-								filteredProducts.map(p => <MemoProductRow key={p.uniqueId} product={p} />)
-							}
+						<div className="tabs">
+							<button
+								className={`tab ${activeTab === 'products' ? 'active' : ''}`}
+								onClick={() => setActiveTab('products')}
+							>
+								Товары
+							</button>
+							<button
+								className={`tab ${activeTab === 'carousel' ? 'active' : ''}`}
+								onClick={() => setActiveTab('carousel')}
+							>
+								Карусель
+							</button>
 						</div>
+
+						{activeTab === 'products' && (
+							<>
+								<button className="btn" onClick={() => setEditing(structuredClone(emptyFlower))}>
+									+ Добавить товар
+								</button>
+
+								<input
+									className="search-input"
+									placeholder="Поиск..."
+									value={search}
+									onChange={e => setSearch(e.target.value)}
+								/>
+
+								<div className="products-list">
+									{loading ? <div className="muted">Загрузка...</div> :
+										filteredProducts.map(p => (
+											<ProductRow
+												key={p.uniqueId}
+												product={p}
+												onSelect={handleSelectFlower}
+												onCopyLink={handleCopyLink}
+												onDelete={deleteProduct}
+												apiBase={API}
+											/>
+										))
+									}
+								</div>
+							</>
+						)}
 
 						<div className="sidebar-foot">
 							<button className="btn danger" onClick={logout}>Выйти</button>
@@ -204,39 +252,43 @@ const Admin = () => {
 					</aside>
 
 					<section className="editor-panel">
-						{editing ? (
-							isEditing ? (
-								<FlowerEditor
-									editing={editing}
-									updateEditing={(key, value) =>
-										setEditing(prev => prev ? { ...prev, [key]: value } : prev)
-									}
-									updateNested={(key, nestedKey, value) =>
-										setEditing(prev => prev ? { ...prev, [key]: { ...(prev[key] as object), [nestedKey]: value } } : prev)
-									}
-									uploadImage={async file => {
-										const fd = new FormData();
-										fd.append("image", file);
-										const res = await fetch(API("/api/upload"), { method: "POST", body: fd });
-										if (!res.ok) return null;
-										const { url } = await res.json();
-										return url as string;
-									}}
-								/>
+						{activeTab === 'products' ? (
+							editing ? (
+								isEditing ? (
+									<FlowerEditor
+										editing={editing}
+										updateEditing={(key, value) =>
+											setEditing(prev => prev ? { ...prev, [key]: value } : prev)
+										}
+										updateNested={(key, nestedKey, value) =>
+											setEditing(prev => prev ? { ...prev, [key]: { ...(prev[key] as object), [nestedKey]: value } } : prev)
+										}
+										uploadImage={async file => {
+											const fd = new FormData();
+											fd.append("image", file);
+											const res = await fetch(API("/api/upload"), { method: "POST", body: fd });
+											if (!res.ok) return null;
+											const { url } = await res.json();
+											return url as string;
+										}}
+									/>
+								) : (
+									<FlowerViewer
+										flower={editing}
+										onEdit={() => setIsEditing(true)}
+										onDelete={() => deleteProduct(editing.id)}
+										onCopyLink={() => {
+											navigator.clipboard.writeText(`${window.location.origin}/flower/${editing.uniqueId}`)
+												.then(() => success('Ссылка скопирована!'))
+												.catch(() => error('Не удалось скопировать'));
+										}}
+									/>
+								)
 							) : (
-								<FlowerViewer
-									flower={editing}
-									onEdit={() => setIsEditing(true)}
-									onDelete={() => deleteProduct(editing.id)}
-									onCopyLink={() => {
-										navigator.clipboard.writeText(`${window.location.origin}/flower/${editing.uniqueId}`)
-											.then(() => success('Ссылка скопирована!'))
-											.catch(() => error('Не удалось скопировать'));
-									}}
-								/>
+								<div className="empty">Выберите товар или нажмите «Добавить товар»</div>
 							)
 						) : (
-							<div className="empty">Выберите товар или нажмите «Добавить товар»</div>
+							<CarouselEditor token={token} />
 						)}
 					</section>
 				</div>

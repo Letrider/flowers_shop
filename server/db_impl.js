@@ -134,4 +134,51 @@ function getProductBySlug(slug) {
 	return data.products.find(p => p.uniqueId === slug) || null;
 }
 
-module.exports = { init, getAdminByEmail, insertAdmin, getAllProducts, getProduct, insertProduct, updateProduct, deleteProduct, getHomeCarousel, generateUniqueSlug, getProductBySlug };
+function addHomeCarouselSlide(slideData) {
+	const data = readData();
+	const slide = {
+		id: Date.now(),
+		...slideData,
+		createdAt: new Date().toISOString()
+	};
+	data.homeCarousel.push(slide);
+	writeData(data);
+	return slide;
+}
+
+function updateHomeCarouselSlide(index, slideData) {
+	const data = readData();
+	if (index < 0 || index >= data.homeCarousel.length) return null;
+	data.homeCarousel[index] = {
+		...data.homeCarousel[index],
+		...slideData,
+		updatedAt: new Date().toISOString()
+	};
+	writeData(data);
+	return data.homeCarousel[index];
+}
+
+function deleteHomeCarouselSlide(index) {
+	const data = readData();
+	if (index < 0 || index >= data.homeCarousel.length) return false;
+	data.homeCarousel.splice(index, 1);
+	writeData(data);
+	return true;
+}
+
+module.exports = {
+	init,
+	getAdminByEmail,
+	insertAdmin,
+	getAllProducts,
+	getProduct,
+	insertProduct,
+	updateProduct,
+	deleteProduct,
+	getHomeCarousel,
+	addHomeCarouselSlide,
+	updateHomeCarouselSlide,
+	deleteHomeCarouselSlide,
+	generateUniqueSlug,
+	getProductBySlug
+};

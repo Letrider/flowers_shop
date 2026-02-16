@@ -1,47 +1,89 @@
 Project: flowers_shop — MVP admin + backend
 
-Run locally
+## Быстрый старт
 
-1) Frontend
+### 1) Backend
 
-Install & run Vite dev server (from project root):
+Запустите сервер в папке `server`:
+
+```bash
+cd server
+npm install
+cp .env.example .env  # Скопируйте и настройте переменные окружения
+npm run dev
+```
+
+Сервер запустится на `http://localhost:4000`
+
+### 2) Frontend
+
+Установите зависимости и запустите Vite dev server (из корня проекта):
 
 ```bash
 npm install
 npm run dev
 ```
 
-Make sure `.env` in project root contains:
+Убедитесь, что в корне проекта есть `.env` с настройкой API:
 
 ```
 VITE_API_BASE=http://localhost:4000
 ```
 
-If you add `.env`, restart the frontend dev server so Vite picks it up.
+**Важно:** После добавления/изменения `.env` перезапустите сервер разработки.
 
-2) Backend
+## Админ-панель
 
-Start server in `server` folder:
+Админ-панель доступна по адресу: `http://localhost:5173/admin`
 
-```bash
-cd server
-npm install
-npm run dev
-```
+**Учетные данные по умолчанию:**
+- Email: `admin@example.com`
+- Пароль: `admin`
 
-Notes
-- Admin default credentials: `admin@example.com` / `admin` (change in `server/.env`).
-- Uploads are stored in `server/uploads/` and served at `http://localhost:4000/uploads/...`.
-- Data is persisted in `server/data.json` (simple JSON DB for MVP).
+**Возможности админки:**
+- Управление товарами (создание, редактирование, удаление)
+- Управление домашней каруселью
+- Загрузка изображений
+- Просмотр товаров с полной информацией
 
-What I added
-- Backend: `server/index.js`, `server/routes/*`, `server/db_impl.js`, `server/data.json` (sample products), `server/nodemon.json`.
-- Frontend: `src/pages/Admin.tsx`, connected `src/pages/Products.tsx` to API, route `/admin` added.
+**Важно:** Измените учетные данные в `server/.env` для продакшена!
 
-Next recommended steps
-- Optionally replace file DB with SQLite/Postgres for production.
-- Use Cloudinary/S3 for image storage.
-- Add role-based access if more admins needed.
+## Архитектура
+
+### Backend
+- REST API на Express.js
+- JWT авторизация
+- Файловое хранилище данных (JSON)
+- Загрузка файлов через Multer
+- Автоматическое создание upload директорий
+
+### Frontend
+- React + TypeScript + Vite
+- React Router для навигации
+- SCSS для стилей
+- React Toastify для уведомлений
+- Контекст для корзины
+
+## Структура данных
+
+Данные хранятся в `server/data.json`:
+- `products` - товары
+- `admins` - администраторы
+- `homeCarousel` - слайды домашней карусели
+
+Загруженные файлы: `server/uploads/`
+
+## API Endpoints
+
+См. `server/README.md` для полного списка эндпоинтов.
+
+## Следующие шаги
+
+- Замените файловое хранилище на SQLite/Postgres для продакшена
+- Используйте Cloudinary/S3 для хранения изображений
+- Добавьте role-based доступ при необходимости
+- Настройте CORS для продакшн-домена
+- Добавьте rate limiting и другие меры безопасности
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

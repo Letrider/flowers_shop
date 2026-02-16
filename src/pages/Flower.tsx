@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { FlowerMoreInformation } from "../components/FlowerMoreInformation/FlowerMoreInformation";
-import { FlowersImages } from "../components/FlowersImages/FlowersImages";
 import { Footer } from "../components/Footer/Footer";
 import { SvgShortArrow } from "../components/Icons/ShortArrow/ShortArrow";
 import { NavbarFlower } from "../components/Navbars/NavbarFlower/NavbarFlower";
@@ -22,17 +21,17 @@ export const Flower = () => {
 
     if (!flower) return <h1>Такой цветок не найден..</h1>;
 
-    const flowersImages = [
-        'http://localhost:4000/uploads/flowers/1.png',
-        'http://localhost:4000/uploads/flowers/2.png',
-        'http://localhost:4000/uploads/flowers/3.png',
-        'http://localhost:4000/uploads/flowers/4.png',
-        'http://localhost:4000/uploads/flowers/5.png',
-        'http://localhost:4000/uploads/flowers/6.png',
-        'http://localhost:4000/uploads/flowers/7.png',
-        'http://localhost:4000/uploads/flowers/8.png',
-        'http://localhost:4000/uploads/flowers/9.png',
-    ];
+    // const flowersImages = [
+    //     'http://localhost:4000/uploads/flowers/1.png',
+    //     'http://localhost:4000/uploads/flowers/2.png',
+    //     'http://localhost:4000/uploads/flowers/3.png',
+    //     'http://localhost:4000/uploads/flowers/4.png',
+    //     'http://localhost:4000/uploads/flowers/5.png',
+    //     'http://localhost:4000/uploads/flowers/6.png',
+    //     'http://localhost:4000/uploads/flowers/7.png',
+    //     'http://localhost:4000/uploads/flowers/8.png',
+    //     'http://localhost:4000/uploads/flowers/9.png',
+    // ];
 
     return (
         <div className={s['main']}>
@@ -108,6 +107,7 @@ export const Flower = () => {
                         <div className={s['action-buttons']}>
                             <Input
                                 min={1}
+                                max={100}
                                 iconWidth={40}
                                 iconHeight={35}
                                 type="number"
@@ -157,7 +157,7 @@ export const Flower = () => {
                     />
                 </div>
 
-                <FlowersImages images={flowersImages} />
+                {/* <FlowersImages images={flowersImages} /> */}
 
                 <div className={s['line']} />
 

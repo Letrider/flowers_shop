@@ -11,6 +11,8 @@
 
     cursor: pointer;
     position: relative;
+
+    backdrop-filter: blur(20px);
 }
 
 .text {
