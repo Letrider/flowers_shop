@@ -4,10 +4,11 @@ import CarouselEditor from "../components/AdminComponents/CarouselEditor";
 import FlowerEditor from "../components/AdminComponents/FlowerEditor";
 import FlowerViewer from "../components/AdminComponents/FlowerViewer";
 import { useToast } from "../components/AdminComponents/hooks/useToast";
+import { config } from "../config/api";
 import '../styles/admin.scss';
 import { type FlowerData } from "../types/flower";
 
-export const API = (path: string) => `${import.meta.env.VITE_API_BASE || ''}${path}`;
+export const API = (path: string) => `${config.apiUrl}${path}`;
 
 const authHeaders = (token: string | null) => ({
 	'Content-Type': 'application/json',

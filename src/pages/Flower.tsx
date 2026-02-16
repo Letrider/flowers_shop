@@ -7,6 +7,7 @@ import { NavbarFlower } from "../components/Navbars/NavbarFlower/NavbarFlower";
 import { AddToCartButton } from "../components/UI/Button/components/AddToCartButton/AddToCartButton";
 import { InformationButton } from "../components/UI/Button/components/InformationButton/InformationButton";
 import { Input } from "../components/UI/Input/input";
+import { getFullUrl } from "../config/api";
 import { useFlower } from "../hooks/useFlower";
 import { useInformationButtons } from "../hooks/useInformationButtons";
 import s from '../styles/Flower.module.scss';
@@ -70,7 +71,7 @@ export const Flower = () => {
                         </div>
 
 
-                        <img className={s['flower-img-mobile']} src={`http://localhost:4000${flower.image}`} alt="Flower" />
+                        <img className={s['flower-img-mobile']} src={getFullUrl(flower.image)} alt="Flower" />
 
 
                         <div className={s['flower-text']}>
@@ -133,7 +134,7 @@ export const Flower = () => {
                             )}
                         </div>
 
-                        <img className={s['flower-img']} src={`http://localhost:4000${flower.image}`} alt="Flower" />
+                        <img className={s['flower-img']} src={getFullUrl(flower.image)} alt="Flower" />
                     </div>
 
                 </div>

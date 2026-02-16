@@ -27,10 +27,19 @@ npm run dev
 Убедитесь, что в корне проекта есть `.env` с настройкой API:
 
 ```
-VITE_API_BASE=http://localhost:4000
+VITE_API_URL=http://localhost:4000
 ```
 
 **Важно:** После добавления/изменения `.env` перезапустите сервер разработки.
+
+## 🚀 Деплой
+
+Подробные инструкции по деплою приложения смотрите в [DEPLOYMENT.md](./DEPLOYMENT.md)
+
+**Быстрый старт:**
+- **Vercel + Render** (бесплатно): см. раздел "Вариант 1" в DEPLOYMENT.md
+- **VPS**: см. раздел "Вариант 2" в DEPLOYMENT.md  
+- **Docker**: `docker-compose up -d`
 
 ## Админ-панель
 

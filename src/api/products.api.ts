@@ -1,6 +1,7 @@
+import { config } from "../config/api";
 import { type Product } from "../types/flower";
 
-const API_URL = 'http://localhost:4000/api';
+const API_URL = config.apiEndpoint;
 
 export const productsApi = {
 	async getAll(): Promise<Product[]> {

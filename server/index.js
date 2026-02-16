@@ -21,7 +21,26 @@ const mapPath = path.join(uploadsPath, 'map');
 });
 
 const app = express();
-app.use(cors());
+
+// CORS configuration
+const allowedOrigins = process.env.FRONTEND_URL
+	? [process.env.FRONTEND_URL, 'http://localhost:5173']
+	: ['http://localhost:5173'];
+
+app.use(cors({
+	origin: (origin, callback) => {
+		// Разрешаем запросы без origin (например, мобильные приложения, Postman)
+		if (!origin) return callback(null, true);
+
+		if (allowedOrigins.indexOf(origin) !== -1) {
+			callback(null, true);
+		} else {
+			callback(new Error('Not allowed by CORS'));
+		}
+	},
+	credentials: true
+}));
+
 app.use(express.json());
 
 app.use('/uploads', express.static(path.join(__dirname, UPLOAD_DIR)));
