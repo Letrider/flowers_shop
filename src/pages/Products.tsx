@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { config, getFullUrl } from '../config/api';
 
 type Product = {
 	id: number;
@@ -8,21 +9,23 @@ type Product = {
 	featuredImage?: string;
 };
 
-const API = (path: string) => `${import.meta.env.VITE_API_BASE || ''}${path}`;
+const API = (path: string) => `${config.apiUrl}${path}`;
 
 const Products: React.FC = () => {
 	const [items, setItems] = useState<Product[]>([]);
 
-	useEffect(() => { fetchProducts(); }, []);
-
-	const fetchProducts = async () => {
-		try {
-			const res = await fetch(API('/api/products'));
-			if (!res.ok) return;
-			const data = await res.json();
-			setItems(data);
-		} catch (err) { console.error(err); }
-	};
+	useEffect(() => {
+		void fetch(API('/api/products'))
+			.then(res => {
+				if (!res.ok) return null;
+				return res.json();
+			})
+			.then(data => {
+				if (!data) return;
+				setItems(Array.isArray(data) ? data : data?.data || []);
+			})
+			.catch(err => console.error(err));
+	}, []);
 
 	return (
 		<div className="page products-page">
@@ -30,7 +33,7 @@ const Products: React.FC = () => {
 			<div className="products-grid">
 				{items.map(p => (
 					<div key={p.id} className="product-card">
-						{p.featuredImage && <img src={`${import.meta.env.VITE_API_BASE || ''}${p.featuredImage}`} alt={p.name} />}
+						{p.featuredImage && <img src={getFullUrl(p.featuredImage)} alt={p.name} />}
 						<h3>{p.name}</h3>
 						<p>{p.description}</p>
 						<p className="price">{p.price} ₽</p>
