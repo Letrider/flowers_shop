@@ -23,19 +23,35 @@ const mapPath = path.join(uploadsPath, 'map');
 const app = express();
 
 // CORS configuration
-const allowedOrigins = process.env.FRONTEND_URL
-	? [process.env.FRONTEND_URL, 'http://localhost:5173']
-	: ['http://localhost:5173'];
+const rawFrontendOrigins = process.env.FRONTEND_URL
+	? process.env.FRONTEND_URL.split(',').map(origin => origin.trim()).filter(Boolean)
+	: [];
+
+const allowedOrigins = new Set(['http://localhost:5173', 'http://127.0.0.1:5173']);
+
+rawFrontendOrigins.forEach(origin => {
+	allowedOrigins.add(origin);
+	try {
+		const url = new URL(origin);
+		if (url.hostname.startsWith('www.')) {
+			allowedOrigins.add(`${url.protocol}//${url.hostname.replace(/^www\./, '')}`);
+		} else {
+			allowedOrigins.add(`${url.protocol}//www.${url.hostname}`);
+		}
+	} catch {
+		// ignore invalid origin strings in env
+	}
+});
 
 app.use(cors({
 	origin: (origin, callback) => {
 		// Разрешаем запросы без origin (например, мобильные приложения, Postman)
 		if (!origin) return callback(null, true);
 
-		if (allowedOrigins.indexOf(origin) !== -1) {
+		if (allowedOrigins.has(origin)) {
 			callback(null, true);
 		} else {
-			callback(new Error('Not allowed by CORS'));
+			callback(null, false);
 		}
 	},
 	credentials: true
