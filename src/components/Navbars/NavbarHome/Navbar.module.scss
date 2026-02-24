@@ -1,0 +1,164 @@
+
+.navbar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    width: 100%;
+    margin-bottom: vh(55);
+
+    @include tablet {
+      margin: 0;
+    }
+
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // gap: vh(80);
+
+    position: relative;
+
+    width: 100%;
+    height: vh(125);
+
+    @include mobile {
+        gap: 0;
+    }
+
+    @include tablet {
+        gap: 0;
+    }
+
+}
+
+.links {
+    display: flex;
+    gap: vh(80);
+}
+
+.link {
+    font-family: 'Manrope', sans-serif;
+    font-size: vh(18);
+    font-weight: 300;
+    text-decoration: none;
+    color: black;
+}
+
+.logo {
+    position: absolute;
+    font-family: 'florag';
+    font-size: vh(40);
+    font-weight: normal;
+
+    color: black;
+}
+
+.line {
+    width: vh(1839);
+    height: vh(1);
+    background-color: #D7D7D7;
+
+    @include mobile {
+        width: 100%;
+    }
+}
+
+.links-desktop {
+  display: flex;
+  gap: vh(480);
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.burger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  position: absolute;
+
+  @include mobile {
+    right: vwm(10);
+    // top: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @include tablet {
+    display: none;
+  }
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+
+  width: 70%;
+  height: 100vh;
+
+  background-color: #f5f5f5;
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+  padding: vwm(40) vwm(20);
+  gap: vwm(20);
+
+  transition: right .3s ease-out;
+
+  @include mobile { 
+    right: -100%;
+
+    &>header {
+        display: flex;
+        justify-content: flex-end;
+        border-bottom: 1px solid black;
+    }
+  }
+}
+
+.open {
+  right: 0;
+}
+
+.close {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  font-size: vwm(24);
+  
+  cursor: pointer;
+}
+
+.mobile-menu .link {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+
+.buttons-desktop {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    position: absolute;
+    right: vh(20);
+    gap: vh(10);
+
+    @include mobile {
+      top: 0;
+      left: 0;
+      .button {
+        display: none;
+      }
+    }
+}

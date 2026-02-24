@@ -1,0 +1,12 @@
+.underline {
+	text-decoration: underline;
+	position: relative
+}
+
+.underline-custom {
+	width: 100%;
+	height: 1px;
+	position: absolute;
+	bottom: 0;
+	background-color: black;
+}
