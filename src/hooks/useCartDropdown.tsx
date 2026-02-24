@@ -12,7 +12,7 @@ type CartDropdownContextType = {
 	open: () => void;
 	close: () => void;
 	toggle: () => void;
-	cartRef: React.RefObject<HTMLDivElement>;
+	cartRef: React.RefObject<HTMLDivElement | null>;
 };
 
 const CartDropdownContext =
