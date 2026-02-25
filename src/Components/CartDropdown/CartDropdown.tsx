@@ -1,17 +1,16 @@
-import { AnimatePresence, motion } from "motion/react";
 import { useEffect } from "react";
 import { useCart } from "../../context/CartContext";
 import { useCartDropdown } from "../../hooks/useCartDropdown";
+import { SvgClose } from "../Icons/Close/Close";
 import s from "./CartDropdown.module.scss";
 import { Card } from "./components/Card";
-import { SvgClose } from "../Icons/Close/Close";
 
 export const CartDropdown = () => {
 	const {
 		items,
 		totalPrice,
 	} = useCart();
-	const { isOpen, close, cartRef } = useCartDropdown();
+	const { close } = useCartDropdown();
 
 	useEffect(() => {
 		document.body.style.overflow = "hidden";
@@ -23,47 +22,36 @@ export const CartDropdown = () => {
 
 	return (
 		<>
-			<div className={s['background']}></div>
-			<AnimatePresence>
-				{isOpen && (
-					<motion.div
-						className={s.cart}
-						ref={cartRef}
-						initial={{ x: "100%", opacity: 0 }}
-						animate={{ x: 0, opacity: 1 }}
-						exit={{ x: "100%", opacity: 0 }}
-						transition={{ type: "spring", stiffness: 300, damping: 30 }}
-					>
-						<div className={s['cart-header']}>
-							<h1 className={s['total-price']}>ОБЩАЯ СУММА ЗАКАЗА:</h1>
-							<span className={s['total-price']}>{totalPrice} ₽</span>
+			<div className={s['background']} onClick={close}></div>
+			<div className={s.cart}>
+				<div className={s['cart-header']}>
+					<h1 className={s['total-price']}>ОБЩАЯ СУММА ЗАКАЗА:</h1>
+					<span className={s['total-price']}>{totalPrice} ₽</span>
 
-							<h1 className={s['in-cart']}>В КОРЗИНЕ:</h1>
-						
-							<SvgClose className={s['close-icon']} onClick={close} />
-						</div>
+					<h1 className={s['in-cart']}>В КОРЗИНЕ:</h1>
 
-						{items.length > 0 ? (
-							<ul className={s.list}>
-								{items.map(item => (
-									<Card key={item.id} item={item} />
-								))}
-							</ul>
-						) : (
-							<div className={s.empty}>
-								<p>Корзина пуста</p>
-							</div>
-						)}
+					<SvgClose className={s['close-icon']} onClick={close} />
+				</div>
 
-						<div className={s.footer}>
-							<div className={s.total}>
-								<span>ОБЩАЯ СУММА ЗАКАЗА:</span>
-								<strong>{totalPrice} ₽</strong>
-							</div>
-						</div>
-					</motion.div>
+				{items.length > 0 ? (
+					<ul className={s.list}>
+						{items.map(item => (
+							<Card key={item.id} item={item} />
+						))}
+					</ul>
+				) : (
+					<div className={s.empty}>
+						<p>Корзина пуста</p>
+					</div>
 				)}
-			</AnimatePresence>
+
+				<div className={s.footer}>
+					<div className={s.total}>
+						<span>ОБЩАЯ СУММА ЗАКАЗА:</span>
+						<strong>{totalPrice} ₽</strong>
+					</div>
+				</div>
+			</div>
 		</>
 	);
 };

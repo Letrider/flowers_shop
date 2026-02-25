@@ -13,7 +13,6 @@ export const NavbarFlower = () => {
 
     const {
         isOpen: isCartOpen,
-        open,
         toggle,
         cartRef,
     } = useCartDropdown();
@@ -64,7 +63,7 @@ export const NavbarFlower = () => {
                     <div className={s['buttons-desktop']} ref={cartRef}>
                         <div
                             className={s['button']}
-                            onClick={open}
+                            onClick={toggle}
                         ><SvgCart /></div>
                         {isCartOpen && <CartDropdown />}
                     </div>

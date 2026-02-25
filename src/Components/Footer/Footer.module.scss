@@ -217,9 +217,6 @@
         height: vh(100);
 
         &>.payments-image {
-            left: 0;
-            transform: translateX(50%);
-            bottom: 0;
             user-select: none;
             pointer-events: none;
         }

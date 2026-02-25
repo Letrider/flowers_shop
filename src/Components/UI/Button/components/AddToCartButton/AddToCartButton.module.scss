@@ -36,6 +36,17 @@
 			height: vh(30);
 		}
 	}
+
+	@include tablet {
+		width: vh(472);
+
+		padding-right: vh(25);
+
+		&>.cart {
+			width: vh(28);
+			height: vh(30);
+		}
+	}
 }
 
 .union {
@@ -47,5 +58,8 @@
 	z-index: -1;
 
 	@include mobile {
+	}
+
+	@include tablet {
 	}
 }

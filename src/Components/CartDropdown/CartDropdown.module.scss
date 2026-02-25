@@ -5,8 +5,8 @@
     justify-content: space-between;
     gap: vh(16);
 
-    position: absolute;
-    right: 0;
+    position: fixed;
+    right: vh(20);
     top: vh(120);
 
     max-width: vh(824);
@@ -14,7 +14,7 @@
     width: vh(824);
     max-height: vh(793);
 
-    overflow-y: scroll;
+    overflow-y: auto;
     background-color: #000;
     z-index: 9999;
 
@@ -26,6 +26,8 @@
         height: 100vh;
         top: 0;
         left: 0;
+
+        border-radius: 0;
     }
 
     @include tablet {
@@ -35,6 +37,8 @@
         right: vh(20);
         max-width: vh(600);
         max-height: vh(700);
+        border-radius: 0;
+
     }
 }
 
@@ -251,16 +255,20 @@
 }
 
 .background {
-    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 9998;
 
     @include mobile {
-        display: none;
+        display: flex;
     }
 
     @include tablet {
-        display: none;
+        display: flex;
     }
 }
 

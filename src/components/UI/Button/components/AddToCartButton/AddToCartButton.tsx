@@ -2,7 +2,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useCart } from "../../../../../context/CartContext";
 import { useCartDropdown } from "../../../../../hooks/useCartDropdown";
 import type { FlowerData } from "../../../../../types/flower";
-import { SvgCartSecond } from "../../../../Icons/CartSecond/CartSecond";
 import { SvgUnion } from "../../../../Icons/CartSecond/components/Union/Union";
 import s from "./AddToCartButton.module.scss";
 
@@ -58,7 +57,6 @@ export const AddToCartButton = ({ flower, quantity, onClick = () => { } }: Props
 				</motion.h1>
 			</AnimatePresence>
 
-			<SvgCartSecond className={s.cart} />
 			<SvgUnion className={s.union} />
 		</motion.button>
 	);
