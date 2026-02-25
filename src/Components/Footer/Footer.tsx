@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { API } from "../../pages/Admin";
 import s from './Footer.module.scss';
 
@@ -23,8 +24,8 @@ export const Footer = () => {
 			<h1 className={s['logo-text']}>Долина роз</h1>
 			<div className={s['underfooter']}>
 				<div className={s['politics']}>
-					<span>Политика конфиденциальности</span>
-					<span>Копирайт Долина роз</span>
+					<Link to="/privacy-policy">Политика конфиденциальности</Link>
+					<Link to="/copyright">Копирайт и авторские права</Link>
 				</div>
 				<div className={s['payments']}>
 					<img className={s['payments-image']} src="/payments.png" alt="" />

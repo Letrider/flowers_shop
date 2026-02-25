@@ -1,0 +1,104 @@
+.legal-page {
+	min-height: 100vh;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	padding: vh(80) vh(24);
+}
+
+.legal-content {
+	width: 100%;
+	max-width: vh(1200);
+	display: flex;
+	flex-direction: column;
+	gap: vh(28);
+}
+
+.title {
+	font-family: 'druzhok', sans-serif;
+	font-size: vh(88);
+	line-height: 1;
+	text-transform: uppercase;
+}
+
+.updated {
+	font-size: vh(20);
+	color: #6A6A6A;
+}
+
+.section {
+	display: flex;
+	flex-direction: column;
+	gap: vh(10);
+
+	& > h2 {
+		font-size: vh(34);
+		font-weight: 600;
+	}
+
+	& > p,
+	& > ul {
+		font-size: vh(22);
+		line-height: 1.45;
+	}
+
+	& > ul {
+		padding-left: vh(28);
+		display: flex;
+		flex-direction: column;
+		gap: vh(8);
+	}
+}
+
+.link {
+	text-decoration: underline;
+	text-underline-offset: vh(3);
+}
+
+@include mobile {
+	.legal-page {
+		padding: vh(32) vh(16);
+	}
+
+	.title {
+		font-size: vh(46);
+	}
+
+	.updated {
+		font-size: vh(16);
+	}
+
+	.section {
+		gap: vh(8);
+
+		& > h2 {
+			font-size: vh(26);
+		}
+
+		& > p,
+		& > ul {
+			font-size: vh(18);
+		}
+	}
+}
+
+@include tablet {
+	.legal-page {
+		padding: vh(48) vh(20);
+	}
+
+	.title {
+		font-size: vh(62);
+	}
+
+	.section {
+		& > h2 {
+			font-size: vh(30);
+		}
+
+		& > p,
+		& > ul {
+			font-size: vh(20);
+		}
+	}
+}

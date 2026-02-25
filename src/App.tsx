@@ -6,8 +6,10 @@ import About from './pages/About';
 import Admin from "./pages/Admin";
 import Catalog from "./pages/Catalog";
 import Contact from './pages/Contact';
+import Copyright from './pages/Copyright';
 import { Flower } from './pages/Flower';
 import Home from './pages/Home';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 import Products from './pages/Products';
 
 const App = () => {
@@ -24,6 +26,8 @@ const App = () => {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/catalog" element={<Catalog />} />
                 <Route path="/flower/:flowerId" element={<Flower />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/copyright" element={<Copyright />} />
                 <Route path="/admin" element={<Admin />} />
                 <Route path="*" element={<Home />} />
               </Routes>

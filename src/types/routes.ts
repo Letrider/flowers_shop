@@ -3,4 +3,6 @@ export enum ROUTES {
 	products = '/products',
 	about = '/about',
 	contact = '/contact',
+	privacyPolicy = '/privacy-policy',
+	copyright = '/copyright',
 }

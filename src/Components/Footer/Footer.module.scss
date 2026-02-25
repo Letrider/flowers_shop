@@ -160,13 +160,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: absolute;
+    // position: absolute;
     padding-inline: vh(38);
 
-    &>span {
+    &>a {
         color: #6A6A6A;
         font-size: vh(20);
-        cursor: not-allowed;
+        cursor: pointer;
+        text-decoration: underline;
+        text-underline-offset: vh(3);
     }
 
     @include mobile {
