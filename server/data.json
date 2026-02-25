@@ -2,12 +2,7 @@
   "nextAdminId": 2,
   "nextProductId": 7,
   "admins": [
-    {
-      "id": 1,
-      "email": "admin@example.com",
-      "passwordHash": "$2a$10$qcqUzWi48JuQP0BT5Z3Rk.Yth7buwK1ayt/UAsy/6nkAxACh2dO6i",
-      "createdAt": "2026-01-28T17:12:34.225Z"
-    }
+
   ],
   "products": [
     {

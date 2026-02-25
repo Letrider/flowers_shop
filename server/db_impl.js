@@ -44,8 +44,8 @@ function init() {
 	if (!data.homeCarousel) data.homeCarousel = [];
 
 	if (data.admins.length === 0) {
-		const email = process.env.ADMIN_EMAIL || 'admin@example.com';
-		const pass = process.env.ADMIN_PASSWORD || 'admin';
+		const email = process.env.ADMIN_EMAIL || 'dagcvettorg@mail.ru';
+		const pass = process.env.ADMIN_PASSWORD || 'kiparis09';
 		const hash = bcrypt.hashSync(pass, 10);
 		data.admins.push({
 			id: data.nextAdminId++,
