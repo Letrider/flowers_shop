@@ -17,7 +17,7 @@ export const Footer = () => {
 			<p className={s['address']}>ул. Генерала Омарова, 141, Махачкала, Респ. Дагестан, Россия, 367010</p>
 			<div className={s['socials']}>
 				<a href="https://instagram.com/dolinaroz05" target="_blank">
-					<img className={s['icon']} src="/socials/Whatsapp.svg" alt="" />
+					<img className={s['icon']} src="/socials/Instagram.svg" alt="" />
 				</a>
 			</div>
 			<img className={s['map']} src={API(`/uploads/map/map.png`)} alt="" />
