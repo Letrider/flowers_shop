@@ -3,6 +3,7 @@ import { HomeButton } from '../components/HomeButton/HomeButton';
 import { Navbar } from "../components/Navbars/NavbarHome/Navbar";
 import { SmartUnderlinedText } from "../components/SmartUnderliningText/SmartUnderliningText";
 import { CarouselButton } from "../components/UI/Button/components/CarouselButton/CarouselButton";
+import { LoadingScreen } from "../components/UI/Loading/LoadingScreen";
 import { useHomeCarousel } from '../hooks/useHomeCarousel';
 import s from '../styles/home.module.scss';
 import { API } from "./Admin";
@@ -10,7 +11,7 @@ import { API } from "./Admin";
 const Home = () => {
 	const { next, prev, slide } = useHomeCarousel();
 
-	if (!slide) return <div>Загрузка</div>;
+	if (!slide) return <LoadingScreen text="Загрузка главной" />;
 
 	return (
 		<div className={s['home-page']}>

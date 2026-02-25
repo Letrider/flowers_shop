@@ -7,6 +7,7 @@ import { NavbarFlower } from "../components/Navbars/NavbarFlower/NavbarFlower";
 import { AddToCartButton } from "../components/UI/Button/components/AddToCartButton/AddToCartButton";
 import { InformationButton } from "../components/UI/Button/components/InformationButton/InformationButton";
 import { Input } from "../components/UI/Input/input";
+import { LoadingScreen } from "../components/UI/Loading/LoadingScreen";
 import { getFullUrl } from "../config/api";
 import { useFlower } from "../hooks/useFlower";
 import { useInformationButtons } from "../hooks/useInformationButtons";
@@ -20,7 +21,7 @@ export const Flower = () => {
 
     const { flower } = useFlower(flowerId);
 
-    if (!flower) return <h1>Такой цветок не найден..</h1>;
+    if (!flower) return <LoadingScreen text="Загрузка цветка" />;
 
     // const flowersImages = [
     //     'http://localhost:4000/uploads/flowers/1.png',
