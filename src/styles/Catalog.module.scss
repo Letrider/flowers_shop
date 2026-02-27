@@ -2,7 +2,7 @@
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
-	width: 100vw;
+	width: 100%;
 }
 
 .search-container {
@@ -23,6 +23,7 @@
 	padding-left: vh(40);
 
 	width: vh(1049);
+	max-width: 100%;
 	height: vh(65);
 
 	border-radius: vh(10);
@@ -60,6 +61,11 @@
 
 	@include mobile {
 		margin-inline: vh(10);
+		padding-left: vh(20);
+	}
+
+	@include tablet {
+		width: 92%;
 	}
 }
 
@@ -77,12 +83,55 @@
 	}
 }
 
+.empty-state {
+	grid-column: 1 / -1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	gap: vh(14);
+	padding: vh(70) vh(20);
+	background: linear-gradient(#EDEDED, #F7F7F7);
+}
+
+.empty-state-title {
+	font-family: 'florag';
+	font-size: vh(56);
+	color: #2a2a2a;
+	line-height: 1.1;
+
+	@include tablet {
+		font-size: vh(42);
+	}
+
+	@include mobile {
+		font-size: vh(34);
+	}
+}
+
+.empty-state-subtitle {
+	font-family: 'Manrope';
+	font-weight: 400;
+	font-size: vh(22);
+	color: #555;
+
+	@include tablet {
+		font-size: vh(18);
+	}
+
+	@include mobile {
+		font-size: vh(16);
+	}
+}
+
 .flower {
 	user-select: none;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	position: relative;
+	overflow: hidden;
 
 	background: linear-gradient(#E5E6E1, #EDEDED);
 	width: 100%;
@@ -116,6 +165,14 @@
 		@include desktop {
 			font-size: vh(48);
 		}
+
+		@include tablet {
+			font-size: vh(34);
+		}
+
+		@include mobile {
+			font-size: vh(30);
+		}
 	}
 
 	&:hover {
@@ -128,8 +185,8 @@
 	}
 
 	&-image {
-		width: vh(410);
-		height: vh(410);
+		width: min(85%, vh(410));
+		height: min(85%, vh(410));
 		object-fit: contain;
 		max-width: 100%;
 		max-height: 100%;

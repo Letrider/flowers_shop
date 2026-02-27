@@ -29,6 +29,8 @@ const Catalog: React.FC = () => {
 		);
 	}, [flowers, search]);
 
+	const hasNoFlowers = !loading && filteredFlowers.length === 0;
+
 	const gradients = [
 		'linear-gradient(#E5E6E1, #EDEDED)',
 		'linear-gradient(#E1E0D7, #F1F1E8)',
@@ -57,7 +59,20 @@ const Catalog: React.FC = () => {
 
 				<div className={s.catalog}>
 					<AnimatePresence>
-						{filteredFlowers?.sort((a, b) => a.id - b.id).map((flower, index) => {
+						{hasNoFlowers && (
+							<motion.div
+								initial={{ opacity: 0, y: 12 }}
+								animate={{ opacity: 1, y: 0 }}
+								exit={{ opacity: 0, y: -12 }}
+								transition={{ duration: 0.3 }}
+								className={s['empty-state']}
+							>
+								<h2 className={s['empty-state-title']}>В каталоге пока нет товаров</h2>
+								<p className={s['empty-state-subtitle']}>Попробуйте изменить запрос или загляните чуть позже</p>
+							</motion.div>
+						)}
+
+						{filteredFlowers?.slice().sort((a, b) => a.id - b.id).map((flower, index) => {
 							const gradient = gradients[index % gradients.length];
 							return (
 								<motion.a
