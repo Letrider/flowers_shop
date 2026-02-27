@@ -1,8 +1,13 @@
 {
-  "nextAdminId": 2,
+  "nextAdminId": 3,
   "nextProductId": 7,
   "admins": [
-
+    {
+      "id": 2,
+      "email": "dagcvettorg@mail.ru",
+      "passwordHash": "$2a$10$oaCbhP0AOxrHBivZlspEqez22RBWmYJ9GYbd8ztr7MNdd6kUYzySC",
+      "createdAt": "2026-02-27T14:59:45.965Z"
+    }
   ],
   "products": [
     {
