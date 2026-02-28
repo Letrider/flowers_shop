@@ -109,13 +109,17 @@ const Admin = () => {
 	const save = useCallback(async () => {
 		if (!editing) return;
 		const isEdit = Boolean(editing.id);
+		const payload: FlowerData = {
+			...editing,
+			care: editing.flowerInfo?.care || editing.care
+		};
 		try {
 			const res = await fetch(
 				API(isEdit ? `/api/products/${editing.id}` : "/api/products"),
 				{
 					method: isEdit ? "PUT" : "POST",
 					headers: authHeaders(token),
-					body: JSON.stringify(editing)
+					body: JSON.stringify(payload)
 				}
 			);
 			if (!res.ok) throw new Error("Ошибка");

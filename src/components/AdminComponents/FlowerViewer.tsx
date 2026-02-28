@@ -33,7 +33,6 @@ const FlowerViewer: React.FC<FlowerViewerProps> = ({ flower, onEdit, onDelete, o
 					<h2>{flower.subName}</h2>
 					<p><strong>Описание:</strong> {flower.description}</p>
 					<p><strong>Цена:</strong> {flower.price} ₽</p>
-					<p><strong>Уход:</strong> {flower.care}</p>
 					<p><strong>Подкормки:</strong> {flower.fertilizers}</p>
 
 					<div className="viewer-badges">

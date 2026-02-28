@@ -25,7 +25,6 @@ const FlowerEditorComponent: React.FC<Props> = ({ editing, updateEditing, update
 		if (!editing.subName) newErrors.subName = "Поле обязательно";
 		if (!editing.price) newErrors.price = "Поле обязательно";
 		if (!editing.description) newErrors.description = "Поле обязательно";
-		if (!editing.care) newErrors.care = "Поле обязательно";
 		if (!editing.fertilizers) newErrors.fertilizers = "Поле обязательно";
 		if (!editing.image) newErrors.image = "Поле обязательно";
 
@@ -73,12 +72,6 @@ const FlowerEditorComponent: React.FC<Props> = ({ editing, updateEditing, update
 						value={editing.price}
 						onChange={v => updateEditing("price", Number(v))}
 						error={errors.price}
-					/>
-					<FormField
-						label="Уход"
-						value={editing.care}
-						onChange={v => updateEditing("care", v)}
-						error={errors.care}
 					/>
 				</div>
 				<FormField
