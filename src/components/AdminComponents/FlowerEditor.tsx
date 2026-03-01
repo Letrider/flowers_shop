@@ -23,8 +23,7 @@ const FlowerEditorComponent: React.FC<Props> = ({ editing, updateEditing, update
 		const newErrors: Record<string, string> = {};
 		if (!editing.name) newErrors.name = "Поле обязательно";
 		if (!editing.subName) newErrors.subName = "Поле обязательно";
-		if (!editing.price) newErrors.price = "Поле обязательно";
-		if (!editing.description) newErrors.description = "Поле обязательно";
+		if (!Number.isFinite(editing.price) || editing.price <= 0) newErrors.price = "Укажите корректную цену";
 		if (!editing.fertilizers) newErrors.fertilizers = "Поле обязательно";
 		if (!editing.image) newErrors.image = "Поле обязательно";
 
@@ -45,15 +44,21 @@ const FlowerEditorComponent: React.FC<Props> = ({ editing, updateEditing, update
 
 	return (
 		<div className="editor-card">
+			<div style={{ marginBottom: 16, fontSize: 12, color: '#6b7280' }}>
+				<span style={{ color: 'red', marginRight: 4 }}>*</span>
+				обязательные поля
+			</div>
 			<div className="editor-body">
 				<FormField
 					label="Название"
+					required
 					value={editing.name}
 					onChange={v => updateEditing("name", v)}
 					error={errors.name}
 				/>
 				<FormField
 					label="Подназвание"
+					required
 					value={editing.subName}
 					onChange={v => updateEditing("subName", v)}
 					error={errors.subName}
@@ -66,21 +71,36 @@ const FlowerEditorComponent: React.FC<Props> = ({ editing, updateEditing, update
 					error={errors.description}
 				/>
 				<div className="two-cols">
-					<FormField
-						label="Цена"
-						type="number"
-						value={editing.price}
-						onChange={v => updateEditing("price", Number(v))}
-						error={errors.price}
-					/>
+					<label className="price-field">
+						<span>
+							Цена (в рублях)
+							<span style={{ color: 'red', marginLeft: 4 }}>*</span>
+						</span>
+						<div className={`price-input-wrap ${errors.price ? 'has-error' : ''}`}>
+							<input
+								type="text"
+								inputMode="numeric"
+								pattern="[0-9]*"
+								placeholder="Например, 2500"
+								value={editing.price > 0 ? editing.price : ''}
+								onChange={e => {
+									const digitsOnly = e.target.value.replace(/\D/g, '');
+									updateEditing("price", digitsOnly ? Number(digitsOnly) : 0);
+								}}
+							/>
+						</div>
+						{errors.price && <div style={{ color: 'red', marginTop: 4, fontSize: 12 }}>{errors.price}</div>}
+					</label>
 				</div>
 				<FormField
 					label="Удобрения"
+					required
 					value={editing.fertilizers}
 					onChange={v => updateEditing("fertilizers", v)}
 					error={errors.fertilizers}
 				/>
 				<ImageUpload
+					required
 					image={editing.image}
 					onUpload={async file => {
 						const url = await uploadImage(file);
@@ -92,6 +112,7 @@ const FlowerEditorComponent: React.FC<Props> = ({ editing, updateEditing, update
 				<h4>Информация о цветке</h4>
 				<FormField
 					label="Виды"
+					required
 					textarea
 					value={editing.flowerInfo?.types || ""}
 					onChange={v => updateNested("flowerInfo", "types", v)}
@@ -99,6 +120,7 @@ const FlowerEditorComponent: React.FC<Props> = ({ editing, updateEditing, update
 				/>
 				<FormField
 					label="Уход"
+					required
 					textarea
 					value={editing.flowerInfo?.care || ""}
 					onChange={v => updateNested("flowerInfo", "care", v)}
@@ -106,6 +128,7 @@ const FlowerEditorComponent: React.FC<Props> = ({ editing, updateEditing, update
 				/>
 				<FormField
 					label="Прикормка"
+					required
 					textarea
 					value={editing.flowerInfo?.feeding || ""}
 					onChange={v => updateNested("flowerInfo", "feeding", v)}
@@ -113,6 +136,7 @@ const FlowerEditorComponent: React.FC<Props> = ({ editing, updateEditing, update
 				/>
 				<FormField
 					label="Польза"
+					required
 					textarea
 					value={editing.flowerInfo?.benefits || ""}
 					onChange={v => updateNested("flowerInfo", "benefits", v)}
@@ -122,6 +146,7 @@ const FlowerEditorComponent: React.FC<Props> = ({ editing, updateEditing, update
 				<h4>Подробнее</h4>
 				<FormField
 					label="Что это за цветок"
+					required
 					textarea
 					value={editing.moreInfo?.whatIs || ""}
 					onChange={v => updateNested("moreInfo", "whatIs", v)}
@@ -129,6 +154,7 @@ const FlowerEditorComponent: React.FC<Props> = ({ editing, updateEditing, update
 				/>
 				<FormField
 					label="Интересные факты"
+					required
 					textarea
 					value={editing.moreInfo?.interestFacts || ""}
 					onChange={v => updateNested("moreInfo", "interestFacts", v)}
@@ -136,6 +162,7 @@ const FlowerEditorComponent: React.FC<Props> = ({ editing, updateEditing, update
 				/>
 				<FormField
 					label="Как ухаживать"
+					required
 					textarea
 					value={editing.moreInfo?.howToLookAfter || ""}
 					onChange={v => updateNested("moreInfo", "howToLookAfter", v)}

@@ -7,6 +7,7 @@ type Props = {
 	textarea?: boolean;
 	type?: React.HTMLInputTypeAttribute;
 	error?: string;
+	required?: boolean;
 };
 
 const FormField: React.FC<Props> = ({
@@ -15,11 +16,15 @@ const FormField: React.FC<Props> = ({
 	onChange,
 	textarea = false,
 	type = 'text',
-	error
+	error,
+	required = false
 }) => {
 	return (
 		<label style={{ display: 'block', marginBottom: 12 }}>
-			<span style={{ fontWeight: 500 }}>{label}</span>
+			<span style={{ fontWeight: 500 }}>
+				{label}
+				{required && <span style={{ color: 'red', marginLeft: 4 }}>*</span>}
+			</span>
 			{textarea ? (
 				<textarea
 					value={value}

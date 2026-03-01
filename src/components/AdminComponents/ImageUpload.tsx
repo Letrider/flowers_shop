@@ -4,12 +4,13 @@ import { API } from "../../pages/Admin";
 type Props = {
 	image?: string;
 	onUpload: (file: File) => void;
+	required?: boolean;
 };
 
-const ImageUpload: React.FC<Props> = ({ image, onUpload }) => {
+const ImageUpload: React.FC<Props> = ({ image, onUpload, required = false }) => {
 	return (
 		<label>
-			Изображение
+			Изображение{required && <span style={{ color: 'red', marginLeft: 4 }}>*</span>}
 			<div className="images-row">
 				{image && (
 					<div className="thumb featured">

@@ -315,6 +315,19 @@
   flex: 1;
 }
 
+.price-field .price-input-wrap {
+  position: relative;
+}
+
+.price-field .price-input-wrap input {
+  padding-right: 54px;
+  background: #fff;
+}
+
+.price-field .price-input-wrap.has-error input {
+  border-color: var(--danger);
+}
+
 @media (max-width: 768px) {
   .two-cols {
     grid-template-columns: 1fr;

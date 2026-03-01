@@ -51,7 +51,7 @@ export const NavbarFlower = () => {
                 <div className={s['logo-container']}>
 
                     <Link to="/" className={s['logo']}>
-                        Долина роз
+                        DagCvetTorg
                     </Link>
 
 

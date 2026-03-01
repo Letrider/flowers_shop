@@ -13,7 +13,7 @@ export const Navbar = () => {
             <nav className={s['navbar']}>
 
                 <Link to="/" className={s['logo']}>
-                    Долина роз
+                    DagCvetTorg
                 </Link>
                 
                 <div className={s['links-desktop']}>
