@@ -38,7 +38,7 @@ export const InformationButton = ({
 					animate={{ opacity: 1, y: 0 }}
 					exit={{ opacity: 0, y: -50 }}
 				>
-					<p>Описание</p>
+					{/* <p>Описание</p> */}
 					<span>{info}</span>
 				</motion.div>
 			)}
