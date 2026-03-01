@@ -23,7 +23,6 @@ const FlowerEditorComponent: React.FC<Props> = ({ editing, updateEditing, update
 		const newErrors: Record<string, string> = {};
 		if (!editing.name) newErrors.name = "Поле обязательно";
 		if (!editing.subName) newErrors.subName = "Поле обязательно";
-		if (!Number.isFinite(editing.price) || editing.price <= 0) newErrors.price = "Укажите корректную цену";
 		if (!editing.fertilizers) newErrors.fertilizers = "Поле обязательно";
 		if (!editing.image) newErrors.image = "Поле обязательно";
 
@@ -72,10 +71,7 @@ const FlowerEditorComponent: React.FC<Props> = ({ editing, updateEditing, update
 				/>
 				<div className="two-cols">
 					<label className="price-field">
-						<span>
-							Цена (в рублях)
-							<span style={{ color: 'red', marginLeft: 4 }}>*</span>
-						</span>
+						<span>Цена (в рублях)</span>
 						<div className={`price-input-wrap ${errors.price ? 'has-error' : ''}`}>
 							<input
 								type="text"
