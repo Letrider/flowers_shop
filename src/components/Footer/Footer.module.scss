@@ -35,7 +35,7 @@
 
     @include tablet {
         width: 100%;
-        height: vh(1400);
+        height: vh(1200);
         padding-bottom: vh(20);
 
         &>nav {
@@ -121,16 +121,16 @@
 }
 
 .logo-text {
-    font-size: vh(264);
+    font-size: vh(220);
     color: white;
     font-family: 'florag';
 
     @include mobile {
-        font-size: vwm(52);
+        font-size: vwm(42);
     }
 
     @include tablet {
-        font-size: vh(120);
+        font-size: vh(80);
     }
 }
 
@@ -233,11 +233,11 @@
         justify-content: center;
         align-items: center;
         position: relative;
-        height: vh(120);
+        height: vh(100);
 
         &>.payments-image {
-            left: 0;
-            transform: translateX(40%);
+            left: 50%;
+            transform: translateX(-50%);
             bottom: 0;
         }
 
