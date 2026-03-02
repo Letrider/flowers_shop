@@ -36,7 +36,7 @@ const Copyright = () => {
 						<li>Используемый шрифт распространяется по лицензии Creative Commons.</li>
 						<li>Шрифт разрешён для коммерческого и некоммерческого использования.</li>
 						<li>Обязательное условие лицензии: при любом использовании необходимо указывать автора — @NEUDEMONIA.</li>
-						<li>Ссылка на автора: Instagram @NEUDEMONIA.</li>
+						<li>Ссылка на автора: @NEUDEMONIA</li>
 						<li>Рекомендуемая атрибуция: «Font author: @NEUDEMONIA (Creative Commons)».</li>
 					</ul>
 				</section>
