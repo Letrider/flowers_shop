@@ -79,14 +79,14 @@ export const Flower = () => {
                             <InformationButton
                                 id="types"
                                 info={flower.flowerInfo.types}
-                                title="Виды"
+                                title="Описание"
                                 isOpen={openId === 'types'}
                                 onToggle={toggle}
                             />
                             <InformationButton
                                 id="care"
                                 info={flower.flowerInfo.care}
-                                title="Уход за растениями"
+                                title="Уход за растением"
                                 isOpen={openId === 'care'}
                                 onToggle={toggle}
                             />
@@ -94,7 +94,7 @@ export const Flower = () => {
                             <InformationButton
                                 id="feeding"
                                 info={flower.flowerInfo.feeding}
-                                title="Прикормка"
+                                title="Подкормка"
                                 isOpen={openId === 'feeding'}
                                 onToggle={toggle}
                             />

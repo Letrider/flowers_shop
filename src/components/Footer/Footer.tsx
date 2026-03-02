@@ -13,7 +13,7 @@ export const Footer = () => {
 				<a href="/catalog">Каталог</a>
 				{/* <a href="/contacts">Контакты</a> */}
 			</nav>
-			<h1 className={s['phone-number']}>+7 800 555-16-62</h1>
+			<h1 className={s['phone-number']}>+7 928 677-72-03</h1>
 			<p className={s['address']}>ул. Генерала Омарова, 141, Махачкала, Респ. Дагестан, Россия, 367010</p>
 			<div className={s['socials']}>
 				<a href="https://instagram.com/dolinaroz05" target="_blank">

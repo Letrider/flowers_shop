@@ -52,7 +52,7 @@ const Home = () => {
 							transition={{ duration: 0.4, ease: 'easeOut' }}
 						>
 							<HomeButton link={`/flower/${slide.uniqueId}`} text="Уход за растением" />
-							<HomeButton link={`/flower/${slide.uniqueId}`} text="Прикормка" />
+							<HomeButton link={`/flower/${slide.uniqueId}`} text="Подкормка" />
 						</motion.div>
 					</AnimatePresence>
 				</div>
@@ -115,7 +115,7 @@ const Home = () => {
 					</div>
 					<div className={s['mid-bottom-mobile']}>
 						<HomeButton link={`/flower/${slide.uniqueId}`} text="Уход за растением" />
-						<HomeButton link={`/flower/${slide.uniqueId}`} text="Прикормка" />
+						<HomeButton link={`/flower/${slide.uniqueId}`} text="Подкормка" />
 					</div>
 					<div className={s['mid-bottom-description-mobile']}>
 						<motion.p

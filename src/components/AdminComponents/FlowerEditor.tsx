@@ -123,7 +123,7 @@ const FlowerEditorComponent: React.FC<Props> = ({ editing, updateEditing, update
 					error={errors.careInfo}
 				/>
 				<FormField
-					label="Прикормка"
+					label="Подкормка"
 					required
 					textarea
 					value={editing.flowerInfo?.feeding || ""}

@@ -127,8 +127,11 @@
 }   
 
 .titles > h1 {
+    position: relative;
     font-size: vh(190);
     text-transform: uppercase;
+
+    z-index: 100;
 
     @include mobile {
         font-size: vh(80);
@@ -140,10 +143,13 @@
 }
 
 .titles > h3 {
+    position: relative;
     font-size: vh(70);
     text-transform: uppercase;
     position: relative;
     top: vh(-40);
+
+    z-index: 100;
 
     @include mobile {
         font-size: vh(50);
