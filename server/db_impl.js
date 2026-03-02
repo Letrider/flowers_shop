@@ -84,9 +84,10 @@ function getProduct(id) {
 
 function insertProduct(payload) {
 	const data = readData();
+	const { id: _ignoredId, createdAt: _ignoredCreatedAt, updatedAt: _ignoredUpdatedAt, ...safePayload } = payload || {};
 	const prod = {
+		...safePayload,
 		id: data.nextProductId++,
-		...payload,
 		createdAt: new Date().toISOString(),
 		updatedAt: new Date().toISOString()
 	};
@@ -99,7 +100,13 @@ function updateProduct(id, payload) {
 	const data = readData();
 	const idx = data.products.findIndex(p => Number(p.id) === Number(id));
 	if (idx === -1) return null;
-	data.products[idx] = { ...data.products[idx], ...payload, updatedAt: new Date().toISOString() };
+	const {
+		id: _ignoredId,
+		createdAt: _ignoredCreatedAt,
+		updatedAt: _ignoredUpdatedAt,
+		...safePayload
+	} = payload || {};
+	data.products[idx] = { ...data.products[idx], ...safePayload, updatedAt: new Date().toISOString() };
 	writeData(data);
 	return data.products[idx];
 }

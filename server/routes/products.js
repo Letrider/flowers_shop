@@ -33,6 +33,10 @@ router.get('/:id', (req, res) => {
 router.post('/', auth, (req, res) => {
 	const {
 		name,
+		id: _ignoredId,
+		createdAt: _ignoredCreatedAt,
+		updatedAt: _ignoredUpdatedAt,
+		uniqueId: _ignoredUniqueId,
 		...payloadData
 	} = req.body;
 
@@ -53,6 +57,9 @@ router.post('/', auth, (req, res) => {
 
 router.put('/:id', auth, (req, res) => {
 	const {
+		id: _ignoredId,
+		createdAt: _ignoredCreatedAt,
+		updatedAt: _ignoredUpdatedAt,
 		...payload
 	} = req.body;
 

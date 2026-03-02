@@ -109,10 +109,13 @@ const Admin = () => {
 	const save = useCallback(async () => {
 		if (!editing) return;
 		const isEdit = Boolean(editing.id);
-		const payload: FlowerData = {
+		const basePayload = {
 			...editing,
 			care: editing.flowerInfo?.care || editing.care
 		};
+		const { id, ...createPayload } = basePayload;
+		void id;
+		const payload = isEdit ? basePayload : createPayload;
 		try {
 			const res = await fetch(
 				API(isEdit ? `/api/products/${editing.id}` : "/api/products"),
