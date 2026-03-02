@@ -12,6 +12,8 @@ dist
 dist-ssr
 *.local
 
+server/data.json
+
 # Environment variables
 .env
 .env.local
