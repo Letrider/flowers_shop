@@ -21,7 +21,7 @@ export const Footer = () => {
 				</a>
 			</div>
 			<img className={s['map']} src={API(`/uploads/map/map.png`)} alt="" />
-			<h1 className={s['logo-text']}>Долина роз</h1>
+			<h1 className={s['logo-text']}>DagCvetTorg</h1>
 			<div className={s['underfooter']}>
 				<div className={s['politics']}>
 					<Link to="/privacy-policy">Политика конфиденциальности</Link>
