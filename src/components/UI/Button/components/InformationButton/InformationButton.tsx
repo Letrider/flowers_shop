@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import { SvgArrowDown } from "../../../../Icons/ArrowDown/ArrowDown";
 import s from './InformationButton.module.scss';
 
@@ -30,18 +30,27 @@ export const InformationButton = ({
 				</motion.div>
 			</div>
 
-			{isOpen && info && (
-				<motion.div
-					className={s['flower-info']}
-					transition={{ duration: 0.35, ease: 'easeOut' }}
-					initial={{ opacity: 0, y: -50 }}
-					animate={{ opacity: 1, y: 0 }}
-					exit={{ opacity: 0, y: -50 }}
-				>
-					{/* <p>Описание</p> */}
-					<span>{info}</span>
-				</motion.div>
-			)}
+			<AnimatePresence initial={false}>
+				{isOpen && info && (
+					<motion.div
+						transition={{ duration: 0.3, ease: 'easeOut' }}
+						initial={{ height: 0 }}
+						animate={{ height: 'auto' }}
+						exit={{ height: 0 }}
+						style={{ overflow: 'hidden' }}
+					>
+						<motion.div
+							className={s['flower-info']}
+							transition={{ duration: 0.2, ease: 'easeOut' }}
+							initial={{ opacity: 0, y: -8 }}
+							animate={{ opacity: 1, y: 0 }}
+							exit={{ opacity: 0, y: -8 }}
+						>
+							<span>{info}</span>
+						</motion.div>
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</div>
 	);
 };

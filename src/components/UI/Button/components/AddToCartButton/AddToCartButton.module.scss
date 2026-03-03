@@ -24,12 +24,17 @@
 		color: white;
 		z-index: 1000;
 		text-transform: uppercase;
+
+		@include mobile {
+			padding-left: vh(20);
+		}
 	}
 
 	@include mobile {
 		width: 100%;
 
 		padding-right: vh(25);
+		padding-left: 0;
 
 		&>.cart {
 			width: vh(28);
@@ -53,13 +58,17 @@
 	position: absolute;
 	left: 0;
 	top: 0;
-	width: vh(572);
 	height: vh(89);
 	z-index: -1;
+	width: vh(572);
 
 	@include mobile {
+		width: vh(472);
+
+
 	}
 
 	@include tablet {
+
 	}
 }

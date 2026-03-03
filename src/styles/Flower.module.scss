@@ -81,6 +81,10 @@
 .flower-text {
     transition: .3s all;
 
+    width: vh(700);
+    backdrop-filter: blur(3px);
+    border-radius: vh(15);
+
     @include mobile {
         display: flex;
         flex-direction: column;
@@ -292,6 +296,8 @@
     object-fit: contain;
     pointer-events: none;
     user-select: none;
+
+    z-index: -5;
 
     @include mobile {
         display: none;
