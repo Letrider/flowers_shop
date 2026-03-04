@@ -46,10 +46,12 @@ type ProductRowProps = {
 	onCopyLink: (flower: FlowerData) => void;
 	onDelete: (id: number) => void;
 	apiBase: (path: string) => string;
+	position: number;
 };
 
-const ProductRow = React.memo<ProductRowProps>(({ product, onSelect, onCopyLink, onDelete, apiBase }) => (
+const ProductRow = React.memo<ProductRowProps>(({ product, onSelect, onCopyLink, onDelete, apiBase, position }) => (
 	<div className="product-row">
+		<p>{position}</p>
 		<div className="product-row-left" onClick={() => onSelect(product)}>
 			<img src={product.image ? apiBase(product.image) : '/'} alt="" />
 			<div className="product-info">
@@ -69,8 +71,10 @@ const Admin = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [products, setProducts] = useState<FlowerData[]>([]);
+	const [totalProducts, setTotalProducts] = useState(0);
 	const [editing, setEditing] = useState<FlowerData | null>(null);
 	const [loading, setLoading] = useState(false);
+	const [page, setPage] = useState(1);
 	const [isEditing, setIsEditing] = useState(false);
 	const [search, setSearch] = useState('');
 	const [activeTab, setActiveTab] = useState<'products' | 'carousel'>('products');
@@ -95,16 +99,31 @@ const Admin = () => {
 		localStorage.removeItem('admin_token');
 	};
 
-	const fetchProducts = useCallback(async () => {
+	const limit = 20;
+	const totalPages = Math.ceil(totalProducts / limit);
+
+	const fetchProducts = useCallback(async (targetPage: number, reset = false) => {
 		setLoading(true);
 		try {
-			const res = await fetch(API('/api/products'));
+			const res = await fetch(API(`/api/products?page=${targetPage}&limit=${limit}`));
+			if (!res.ok) throw new Error('Не удалось загрузить товары');
 			const json = await res.json();
-			setProducts(Array.isArray(json) ? json : json.data || []);
+			const items: FlowerData[] = Array.isArray(json) ? json : json.data || [];
+			const total = Number(json?.total) || 0;
+
+			setTotalProducts(total);
+			setProducts(prev => {
+				if (reset) return items;
+
+				const merged = [...prev, ...items];
+				return merged.filter((item, index, arr) =>
+					index === arr.findIndex(candidate => candidate.uniqueId === item.uniqueId)
+				);
+			});
 		} finally {
 			setLoading(false);
 		}
-	}, []);
+	}, [limit]);
 
 	const save = useCallback(async () => {
 		if (!editing) return;
@@ -128,7 +147,8 @@ const Admin = () => {
 			if (!res.ok) throw new Error("Ошибка");
 			success(isEdit ? "Товар обновлен" : "Товар создан");
 			setEditing(null);
-			fetchProducts();
+			setPage(1);
+			fetchProducts(1, true);
 		} catch (e) {
 			error("Не удалось сохранить товар: " + e);
 		}
@@ -146,7 +166,8 @@ const Admin = () => {
 			});
 			if (!res.ok) throw new Error("Ошибка удаления");
 			success("Товар удалён");
-			fetchProducts();
+			setPage(1);
+			fetchProducts(1, true);
 			if (editing?.id === id) setEditing(null);
 		} catch (e) {
 			error("Не удалось удалить товар: " + e);
@@ -155,9 +176,31 @@ const Admin = () => {
 	}, [token, editing, fetchProducts]);
 
 	useEffect(() => {
-		if (token) fetchProducts();
+		if (!token) return;
+		setPage(1);
+		setProducts([]);
+		fetchProducts(1, true);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [token]);
+
+	useEffect(() => {
+		if (!token || page === 1) return;
+		fetchProducts(page);
+	}, [page, token, fetchProducts]);
+
+	const handleProductsListScroll = useCallback((event: React.UIEvent<HTMLDivElement>) => {
+		if (activeTab !== 'products') return;
+		if (search.trim()) return;
+		if (loading) return;
+		if (page >= totalPages) return;
+
+		const target = event.currentTarget;
+		const isNearBottom = target.scrollTop + target.clientHeight >= target.scrollHeight - 80;
+
+		if (isNearBottom) {
+			setPage(prev => prev + 1);
+		}
+	}, [activeTab, loading, page, search, totalPages]);
 
 	useEffect(() => {
 		const listener = () => save();
@@ -237,19 +280,34 @@ const Admin = () => {
 									onChange={e => setSearch(e.target.value)}
 								/>
 
-								<div className="products-list">
-									{loading ? <div className="muted">Загрузка...</div> :
-										filteredProducts.map(p => (
-											<ProductRow
-												key={p.uniqueId}
-												product={p}
-												onSelect={handleSelectFlower}
-												onCopyLink={handleCopyLink}
-												onDelete={deleteProduct}
-												apiBase={API}
-											/>
-										))
-									}
+								<div className="muted" style={{ marginBottom: 8 }}>
+									Всего товаров в базе: {totalProducts}
+								</div>
+
+								<div className="products-list" onScroll={handleProductsListScroll}>
+									{filteredProducts.map((p, index) => (
+										<ProductRow
+											key={p.uniqueId}
+											product={p}
+											onSelect={handleSelectFlower}
+											onCopyLink={handleCopyLink}
+											onDelete={deleteProduct}
+											apiBase={API}
+											position={index + 1}
+										/>
+									))}
+
+									{loading && (
+										<div className="muted" style={{ textAlign: 'center', padding: '8px 0' }}>
+											Загрузка...
+										</div>
+									)}
+
+									{!loading && filteredProducts.length === 0 && (
+										<div className="muted" style={{ textAlign: 'center', padding: '8px 0' }}>
+											Нет товаров
+										</div>
+									)}
 								</div>
 							</>
 						)}
