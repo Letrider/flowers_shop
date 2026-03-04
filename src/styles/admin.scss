@@ -128,9 +128,9 @@
 ======================= */
 
 .sidebar {
-  width: 320px;
+  width: 370px;
   background: var(--card);
-  padding: 20px;
+  padding: 10px;
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
@@ -167,6 +167,7 @@
 
   &-left {
     display: flex;
+    align-items: center;
     gap: 12px;
   }
 }

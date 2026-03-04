@@ -51,8 +51,8 @@ type ProductRowProps = {
 
 const ProductRow = React.memo<ProductRowProps>(({ product, onSelect, onCopyLink, onDelete, apiBase, position }) => (
 	<div className="product-row">
-		<p>{position}</p>
 		<div className="product-row-left" onClick={() => onSelect(product)}>
+			<p>{position}</p>
 			<img src={product.image ? apiBase(product.image) : '/'} alt="" />
 			<div className="product-info">
 				<div className="name">{product.name}</div>
