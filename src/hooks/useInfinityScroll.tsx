@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface Props {
 	loading: boolean;
@@ -8,13 +8,23 @@ interface Props {
 }
 
 export const useInfiniteScroll = ({ loading, page, totalPages, onLoadMore }: Props) => {
+	const lastTriggeredPageRef = useRef<number | null>(null);
+
 	useEffect(() => {
+		const threshold = 300;
+
 		const handleScroll = () => {
+			const scrollBottom = window.innerHeight + window.scrollY;
+			const pageHeight = document.documentElement.scrollHeight;
+			const isNearBottom = scrollBottom >= pageHeight - threshold;
+
 			if (
-				window.innerHeight + window.scrollY >= document.body.offsetHeight / 2 &&
+				isNearBottom &&
 				!loading &&
-				page < totalPages
+				page < totalPages &&
+				lastTriggeredPageRef.current !== page
 			) {
+				lastTriggeredPageRef.current = page;
 				onLoadMore();
 			}
 		};

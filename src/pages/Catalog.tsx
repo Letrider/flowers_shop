@@ -72,7 +72,7 @@ const Catalog: React.FC = () => {
 							</motion.div>
 						)}
 
-						{filteredFlowers?.slice().sort((a, b) => a.id - b.id).map((flower, index) => {
+						{filteredFlowers?.map((flower, index) => {
 							const gradient = gradients[index % gradients.length];
 							return (
 								<motion.a
