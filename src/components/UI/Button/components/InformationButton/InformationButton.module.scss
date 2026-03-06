@@ -45,15 +45,15 @@
     }
 
     &>span {
-        font-size: vh(16);
+        font-size: vh(18);
         font-weight: 300;
 
         @include mobile {
-            font-size: vh(16);
+            font-size: vh(18);
         }
 
         @include tablet {
-            font-size: vh(18);
+            font-size: vh(20);
         }
     }
 
