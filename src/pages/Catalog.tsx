@@ -7,9 +7,22 @@ import { useInfiniteScroll } from "../hooks/useInfinityScroll";
 import s from '../styles/Catalog.module.scss';
 import { API } from "./Admin";
 
+type CatalogColumns = 4 | 6 | 8;
+
+const CATALOG_COLUMNS_KEY = 'catalog_columns';
+
+const getInitialColumns = (): CatalogColumns => {
+	if (typeof window === 'undefined') return 4;
+	const storedValue = localStorage.getItem(CATALOG_COLUMNS_KEY);
+	if (storedValue === '6') return 6;
+	if (storedValue === '8') return 8;
+	return 4;
+};
+
 const Catalog: React.FC = () => {
 	const [page, setPage] = useState(1);
 	const [search, setSearch] = useState('');
+	const [columns, setColumns] = useState<CatalogColumns>(getInitialColumns);
 	const limit = 20;
 	const { flowers, total, loading } = useFlowers(page, limit);
 
@@ -38,6 +51,13 @@ const Catalog: React.FC = () => {
 		'linear-gradient(#F3E8E8, #E8F3F3)',
 	];
 
+	const updateColumns = (value: CatalogColumns) => {
+		setColumns(value);
+		if (typeof window !== 'undefined') {
+			localStorage.setItem(CATALOG_COLUMNS_KEY, String(value));
+		}
+	};
+
 	return (
 		<div className={s.page}>
 			<Navbar />
@@ -55,9 +75,22 @@ const Catalog: React.FC = () => {
 							<SvgSearch className={s['search-icon']} />
 						</button>
 					</div>
+					<div className={s['grid-controls']}>
+						<span className={s['grid-controls-label']}>Сетка:</span>
+						{([4, 6, 8] as CatalogColumns[]).map(value => (
+							<button
+								key={value}
+								type="button"
+								className={`${s['grid-option']} ${columns === value ? s['grid-option-active'] : ''}`}
+								onClick={() => updateColumns(value)}
+							>
+								{value}
+							</button>
+						))}
+					</div>
 				</div>
 
-				<div className={s.catalog}>
+				<div className={`${s.catalog} ${s[`catalog--${columns}`]}`}>
 					<AnimatePresence>
 						{hasNoFlowers && (
 							<motion.div
@@ -88,6 +121,7 @@ const Catalog: React.FC = () => {
 								>
 									<img src={API(flower.image)} alt={flower.name} className={s['flower-image']} />
 									<h1 className={s['flower-name']}>{flower.name}</h1>
+									<h1 className={s['flower-subName']}>{flower.subName}</h1>
 									<div className={s['flower-blur']} />
 								</motion.a>
 							);
