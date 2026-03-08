@@ -99,6 +99,14 @@ const Admin = () => {
 		localStorage.removeItem('admin_token');
 	};
 
+	const handleAuthExpired = useCallback(() => {
+		setToken(null);
+		setEditing(null);
+		setIsEditing(false);
+		localStorage.removeItem('admin_token');
+		window.location.assign('/admin');
+	}, []);
+
 	const limit = 20;
 	const totalPages = Math.ceil(totalProducts / limit);
 
@@ -144,16 +152,30 @@ const Admin = () => {
 					body: JSON.stringify(payload)
 				}
 			);
-			if (!res.ok) throw new Error("Ошибка");
+			if (!res.ok) {
+				let serverMessage = 'Ошибка';
+				try {
+					const data = await res.json();
+					if (data?.error) serverMessage = data.error;
+				} catch {
+					// ignore invalid json body
+				}
+
+				if (res.status === 401 || serverMessage === 'Invalid token') {
+					handleAuthExpired();
+					return;
+				}
+				throw new Error(serverMessage);
+			}
 			success(isEdit ? "Товар обновлен" : "Товар создан");
 			setEditing(null);
 			setPage(1);
 			fetchProducts(1, true);
 		} catch (e) {
-			error("Не удалось сохранить товар: " + e);
+			error("Не удалось сохранить товар: " + (e instanceof Error ? e.message : String(e)));
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [editing, token, fetchProducts]);
+	}, [editing, token, fetchProducts, handleAuthExpired]);
 
 	const deleteProduct = useCallback(async (id: number) => {
 		if (!token) return;
@@ -164,16 +186,31 @@ const Admin = () => {
 				method: 'DELETE',
 				headers: authHeaders(token)
 			});
-			if (!res.ok) throw new Error("Ошибка удаления");
+			if (!res.ok) {
+				let serverMessage = 'Ошибка удаления';
+				try {
+					const data = await res.json();
+					if (data?.error) serverMessage = data.error;
+				} catch {
+					// ignore invalid json body
+				}
+
+				if (res.status === 401 || serverMessage === 'Invalid token') {
+					handleAuthExpired();
+					return;
+				}
+
+				throw new Error(serverMessage);
+			}
 			success("Товар удалён");
 			setPage(1);
 			fetchProducts(1, true);
 			if (editing?.id === id) setEditing(null);
 		} catch (e) {
-			error("Не удалось удалить товар: " + e);
+			error("Не удалось удалить товар: " + (e instanceof Error ? e.message : String(e)));
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [token, editing, fetchProducts]);
+	}, [token, editing, fetchProducts, handleAuthExpired]);
 
 	useEffect(() => {
 		if (!token) return;
