@@ -33,6 +33,10 @@
 	font-size: vh(16);
 	color: #2f2f2f;
 	font-weight: 500;
+
+	@include mobile {
+		font-size: vh(13);
+	}
 }
 
 .grid-option {
@@ -48,6 +52,12 @@
 	color: #2f2f2f;
 	cursor: pointer;
 	transition: all 0.2s ease;
+
+	@include mobile {
+		min-width: vh(40);
+		height: vh(30);
+		font-size: vh(12);
+	}
 
 	&:hover {
 		border-color: #1f1f1f;
@@ -102,6 +112,10 @@
 		font-family: 'Manrope';
 		font-weight: 200;
 		width: 90%;
+
+		@include mobile {
+			font-size: vh(18);
+		}
 	}
 
 	@include mobile {
@@ -129,6 +143,41 @@
 
 .catalog--4 {
 	grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.catalog--1 {
+	grid-template-columns: repeat(1, minmax(0, 1fr));
+
+	@include mobile {
+		.flower-name,
+		.flower-subName {
+			font-size: vh(28);
+		}
+	}
+}
+
+.catalog--2 {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+
+	@include mobile {
+		.flower-name,
+		.flower-subName {
+			font-size: vh(22);
+		}
+	}
+}
+
+.catalog--3 {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+
+	@include mobile {
+		.flower-name,
+		.flower-subName {
+			font-size: vh(17);
+			line-clamp: 1;
+			-webkit-line-clamp: 1;
+		}
+	}
 }
 
 .catalog--6 {
@@ -178,7 +227,7 @@
 	}
 
 	@include mobile {
-		font-size: vh(34);
+		font-size: vh(30);
 	}
 }
 
@@ -224,13 +273,26 @@
 	}
 
 	&-name {
-		z-index: 1000;
+		margin: 0;
+		max-width: 100%;
 		position: absolute;
-		opacity: 0; 
-		transition: opacity 0.3s ease;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: calc(100% - vh(20));
 		color: white;
 		font-weight: 600;
 		font-family: 'florag';
+		text-align: center;
+		line-height: 1.05;
+		overflow-wrap: anywhere;
+		hyphens: auto;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		line-clamp: 2;
+		-webkit-line-clamp: 2;
+		overflow: hidden;
+		text-shadow: 0 vh(2) vh(16) rgba(0, 0, 0, 0.35);
 
 		font-size: vh(48);
 
@@ -243,19 +305,30 @@
 		}
 
 		@include mobile {
-			font-size: vh(30);
+			font-size: vh(24);
 		}
 	}
 
 	&-subName {
-		z-index: 1000;
+		margin: 0;
+		max-width: 100%;
 		position: absolute;
+		left: 0;
+		right: 0;
 		bottom: 0;
-		opacity: 0; 
-		transition: opacity 0.3s ease;
 		color: white;
 		font-weight: 600;
 		font-family: 'florag';
+		text-align: center;
+		line-height: 1.05;
+		overflow-wrap: anywhere;
+		hyphens: auto;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		line-clamp: 2;
+		-webkit-line-clamp: 2;
+		overflow: hidden;
+		text-shadow: 0 vh(2) vh(16) rgba(0, 0, 0, 0.35);
 
 		font-size: vh(48);
 
@@ -268,7 +341,28 @@
 		}
 
 		@include mobile {
-			font-size: vh(30);
+			font-size: vh(24);
+		}
+	}
+
+	&-texts {
+		z-index: 1000;
+		position: absolute;
+		inset: vh(16);
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		gap: vh(10);
+		opacity: 0;
+		transition: opacity 0.3s ease;
+		pointer-events: none;
+
+		@include tablet {
+			inset: vh(12);
+		}
+
+		@include mobile {
+			inset: vh(10);
 		}
 	}
 
@@ -276,10 +370,7 @@
 		.flower-blur {
 			opacity: 1;
 		}
-		.flower-name {
-			opacity: 1;
-		}
-		.flower-subName {
+		.flower-texts {
 			opacity: 1;
 		}
 	}

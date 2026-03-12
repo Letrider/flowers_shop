@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "motion/react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { SvgSearch } from "../components/Icons/Search/Search";
 import { Navbar } from "../components/Navbars/NavbarHome/Navbar";
 import { useFlowers } from "../hooks/useFlowersCatalog";
@@ -7,22 +7,34 @@ import { useInfiniteScroll } from "../hooks/useInfinityScroll";
 import s from '../styles/Catalog.module.scss';
 import { API } from "./Admin";
 
-type CatalogColumns = 4 | 6 | 8;
+type MobileCatalogColumns = 1 | 2 | 3;
+type DesktopCatalogColumns = 4 | 6 | 8;
+type CatalogColumns = MobileCatalogColumns | DesktopCatalogColumns;
 
 const CATALOG_COLUMNS_KEY = 'catalog_columns';
+const MOBILE_QUERY = '(max-width: 768px)';
 
-const getInitialColumns = (): CatalogColumns => {
-	if (typeof window === 'undefined') return 4;
+const getIsMobile = (): boolean => {
+	if (typeof window === 'undefined') return false;
+	return window.matchMedia(MOBILE_QUERY).matches;
+};
+
+const getInitialColumns = (isMobile: boolean): CatalogColumns => {
+	if (typeof window === 'undefined') return isMobile ? 2 : 4;
 	const storedValue = localStorage.getItem(CATALOG_COLUMNS_KEY);
-	if (storedValue === '6') return 6;
-	if (storedValue === '8') return 8;
-	return 4;
+	const parsedValue = Number(storedValue) as CatalogColumns;
+
+	if (isMobile && [1, 2, 3].includes(parsedValue)) return parsedValue;
+	if (!isMobile && [4, 6, 8].includes(parsedValue)) return parsedValue;
+
+	return isMobile ? 2 : 4;
 };
 
 const Catalog: React.FC = () => {
 	const [page, setPage] = useState(1);
 	const [search, setSearch] = useState('');
-	const [columns, setColumns] = useState<CatalogColumns>(getInitialColumns);
+	const [isMobile, setIsMobile] = useState(getIsMobile);
+	const [columns, setColumns] = useState<CatalogColumns>(() => getInitialColumns(getIsMobile()));
 	const limit = 20;
 	const { flowers, total, loading } = useFlowers(page, limit);
 
@@ -51,7 +63,35 @@ const Catalog: React.FC = () => {
 		'linear-gradient(#F3E8E8, #E8F3F3)',
 	];
 
+	const availableColumns = isMobile
+		? ([1, 2, 3] as CatalogColumns[])
+		: ([4, 6, 8] as CatalogColumns[]);
+
+	useEffect(() => {
+		if (typeof window === 'undefined') return;
+
+		const mediaQuery = window.matchMedia(MOBILE_QUERY);
+		const handleChange = (event: MediaQueryListEvent) => {
+			setIsMobile(event.matches);
+		};
+
+		setIsMobile(mediaQuery.matches);
+		mediaQuery.addEventListener('change', handleChange);
+
+		return () => mediaQuery.removeEventListener('change', handleChange);
+	}, []);
+
+	useEffect(() => {
+		if (availableColumns.includes(columns)) return;
+		const defaultColumns = isMobile ? 2 : 4;
+		setColumns(defaultColumns);
+		if (typeof window !== 'undefined') {
+			localStorage.setItem(CATALOG_COLUMNS_KEY, String(defaultColumns));
+		}
+	}, [availableColumns, columns, isMobile]);
+
 	const updateColumns = (value: CatalogColumns) => {
+		if (!availableColumns.includes(value)) return;
 		setColumns(value);
 		if (typeof window !== 'undefined') {
 			localStorage.setItem(CATALOG_COLUMNS_KEY, String(value));
@@ -77,7 +117,7 @@ const Catalog: React.FC = () => {
 					</div>
 					<div className={s['grid-controls']}>
 						<span className={s['grid-controls-label']}>Сетка:</span>
-						{([4, 6, 8] as CatalogColumns[]).map(value => (
+						{availableColumns.map(value => (
 							<button
 								key={value}
 								type="button"
@@ -120,8 +160,10 @@ const Catalog: React.FC = () => {
 									style={{ background: gradient }}
 								>
 									<img src={API(flower.image)} alt={flower.name} className={s['flower-image']} />
-									<h1 className={s['flower-name']}>{flower.name}</h1>
-									<h1 className={s['flower-subName']}>{flower.subName}</h1>
+									<div className={s['flower-texts']}>
+										<h1 className={s['flower-name']}>{flower.name}</h1>
+										{flower.subName && <h2 className={s['flower-subName']}>{flower.subName}</h2>}
+									</div>
 									<div className={s['flower-blur']} />
 								</motion.a>
 							);
