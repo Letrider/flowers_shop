@@ -1,10 +1,9 @@
-node_modules;
-npm - debug.log;
+.git
+.github
+node_modules
 dist
-	.env
-	.env.local
-	.git
-	.gitignore;
-README.md
-	.vscode
-	.idea;
+.env
+server/.env
+server/data.json
+server/uploads
+*.log
